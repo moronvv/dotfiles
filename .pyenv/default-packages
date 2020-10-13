@@ -1,0 +1,10 @@
+pylint
+flake8
+mypy
+isort
+yapf
+ipython
+ipdb
+pytest
+rope
+jedi
