@@ -162,3 +162,4 @@ eval "$(pyenv virtualenv-init -)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+[ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env

@@ -5,7 +5,8 @@ call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " themes
 call minpac#add('gruvbox-community/gruvbox')
-call minpac#add('arcticicestudio/nord-vim')
+call minpac#add('sainnhe/gruvbox-material')
+call minpac#add('dracula/vim', {'name': 'dracula'})
 
 " statusline
 call minpac#add('itchyny/lightline.vim')
@@ -35,10 +36,13 @@ call minpac#add('tpope/vim-vinegar')
 
 " ide
 call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-call minpac#add('sheerun/vim-polyglot')
+" call minpac#add('sheerun/vim-polyglot')
+call minpac#add('neovimhaskell/haskell-vim')
 call minpac#add('lepture/vim-jinja')
 call minpac#add('numirias/semshi', {'do': ':UpdateRemotePlugins'})
 call minpac#add('MathSquared/vim-python-sql')
+" call minpac#add('nvim-treesitter/nvim-treesitter')
+" call minpac#add('romgrk/nvim-treesitter-context')
 
 " markdown
 call minpac#add('godlygeek/tabular')
@@ -58,7 +62,6 @@ call minpac#add('christoomey/vim-tmux-navigator')
 call minpac#add('tpope/vim-eunuch')
 call minpac#add('tpope/vim-sleuth')
 call minpac#add('Yggdroot/indentLine')
-" call minpac#add('aymericbeaumet/vim-symlink')
 
 " minpac utility commands
 command! PackUpdate call minpac#update()
@@ -70,15 +73,22 @@ command! PackStatus call minpac#status()
 syntax on
 set background=dark
 colorscheme gruvbox
-hi Normal               ctermbg=NONE guibg=NONE
-hi LineNr               ctermbg=NONE guibg=NONE
-hi SignColumn           ctermbg=NONE guibg=NONE
-hi CursorLineNr         ctermbg=NONE guibg=NONE
-hi StatusLineNC         ctermfg=NONE guibg=NONE
-hi VertSplit            ctermbg=NONE guibg=NONE
-hi CocErrorSign         ctermbg=NONE ctermfg=167
-hi CocWarningSign       ctermbg=NONE ctermfg=208
-hi CocHintSign          ctermbg=NONE ctermfg=109
+hi Normal                ctermbg=NONE guibg=NONE
+hi LineNr                ctermbg=NONE guibg=NONE
+hi SignColumn            ctermbg=NONE guibg=NONE
+hi CursorLineNr          ctermbg=NONE guibg=NONE
+hi StatusLineNC          ctermfg=NONE guibg=NONE
+hi VertSplit             ctermbg=NONE guibg=NONE
+hi CocErrorSign          ctermbg=NONE ctermfg=167 guifg=#d75f5f
+hi CocWarningSign        ctermbg=NONE ctermfg=208 guifg=#ff8700
+hi CocHintSign           ctermbg=NONE ctermfg=109 guifg=#87afaf
+hi link CocErrorFloat    CocErrorSign
+hi link CocWarningFloat  CocWarningSign
+hi link CocHintFloat     CocHintSign
+hi GitGutterAdd          guifg=#00875f ctermfg=2
+hi GitGutterChange       guifg=#ffff00 ctermfg=3
+hi GitGutterDelete       guifg=#ff5f00 ctermfg=2
+hi GitGutterChangeDelete guifg=#0087ff ctermfg=4
 " }}}
 
 " lightline {{{
@@ -204,6 +214,13 @@ nnoremap <C-l> <C-w>l
 
 " autowrite on buf leave
 au FocusLost,WinLeave * :silent! noautocmd wa
+
+" truecolors
+set termguicolors
+
+" transparency
+set pumblend=10
+set winblend=10
 " }}}
 
 " netrw {{{
@@ -215,14 +232,6 @@ augroup END
 function! NetrwMapping()
   nnoremap <buffer> <c-l> :wincmd l<cr>
 endfunction
-" }}}
-
-" signcolumn {{{
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=29
-highlight GitGutterChange ctermfg=3
-highlight GitGutterDelete ctermfg=1
-highlight GitGutterChangeDelete ctermfg=4
 " }}}
 
 " coc {{{
@@ -267,10 +276,9 @@ endfunction
 " Use <c-space> to trigger completion.
 " inoremap <silent><expr> <c-space> coc#refresh()
 
-" Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
+nmap <silent> [p <Plug>(coc-diagnostic-prev)
+nmap <silent> ]p <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -313,10 +321,13 @@ augroup end
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
 
+" navigate chunks of current buffer
+nmap [g <Plug>(coc-git-prevchunk)
+nmap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
-nmap <leader>gi <Plug>(coc-git-chunkinfo)
+nmap gds <Plug>(coc-git-chunkinfo)
 " undo current chunk diff
-nmap <leader>gu :CocCommand git.chunkUndo<CR>
+nmap gdu :CocCommand git.chunkUndo<CR>
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -391,7 +402,7 @@ nmap <leader>gs :Gstatus<CR>
 " }}}
 
 " xkb-switch {{{
-let g:XkbSwitchEnabled = 0
+let g:XkbSwitchEnabled = 1
 " }}}
 
 " vim:fdm=marker
