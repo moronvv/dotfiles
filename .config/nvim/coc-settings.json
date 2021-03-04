@@ -2,11 +2,15 @@
   "python.jediEnabled": false,
   "python.linting.enabled": true,
   "python.linting.flake8Enabled": true,
+  "python.linting.flake8Args": ["--max-line-length=100"],
   "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": ["--disable=C,W0703,W0621,W0611,I1101"],
+  "python.linting.pylintArgs": [
+    "--disable=C0103,C0114,C0115,C0116,W0703,W0621,W0611,W1203,I1101,R0903"
+  ],
   "python.linting.prospectorEnabled": false,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": ["--style={ column_limit: 100 }"],
   "python.envFile": "${workspaceFolder}/.vim/.env",
   "diagnostic.checkCurrentLine": true,
   "git.addedSign.hlGroup": "GitGutterAdd",

@@ -1,72 +1,67 @@
-" minpac {{{
-packadd minpac
-call minpac#init()
-call minpac#add('k-takata/minpac', {'type': 'opt'})
+" plug {{{
+call plug#begin()
 
 " themes
-call minpac#add('gruvbox-community/gruvbox')
-call minpac#add('sainnhe/gruvbox-material')
-call minpac#add('dracula/vim', {'name': 'dracula'})
+Plug 'gruvbox-community/gruvbox'
+Plug 'dracula/vim', {'as': 'dracula'}
 
 " statusline
-call minpac#add('itchyny/lightline.vim')
+Plug 'itchyny/lightline.vim'
 
 " operator-pending
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-commentary')
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-repeat')
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-repeat'
 
 " search/replace
-call minpac#add('tpope/vim-abolish')
-call minpac#add('nelstrom/vim-visual-star-search')
-call minpac#add('romainl/vim-cool')
+Plug 'tpope/vim-abolish'
+Plug 'nelstrom/vim-visual-star-search'
+Plug 'romainl/vim-cool'
 
 " session
-call minpac#add('tpope/vim-obsession')
+Plug 'tpope/vim-obsession'
 
 " git
-call minpac#add('tpope/vim-fugitive')
+Plug 'tpope/vim-fugitive'
 
 " keyboard layout
-call minpac#add('lyokha/vim-xkbswitch')
+Plug 'lyokha/vim-xkbswitch'
 
 " netrw
-call minpac#add('tpope/vim-vinegar')
+Plug 'tpope/vim-vinegar'
 
 " ide
-call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
-" call minpac#add('sheerun/vim-polyglot')
-call minpac#add('neovimhaskell/haskell-vim')
-call minpac#add('lepture/vim-jinja')
-call minpac#add('numirias/semshi', {'do': ':UpdateRemotePlugins'})
-call minpac#add('MathSquared/vim-python-sql')
-" call minpac#add('nvim-treesitter/nvim-treesitter')
-" call minpac#add('romgrk/nvim-treesitter-context')
+Plug 'neoclide/coc.nvim' ", {'commit': 'ca248166d7bc5cf5d5a5ae624391f9a91be4dbec'}
+" Plug 'sheerun/vim-polyglot'
+Plug 'neovimhaskell/haskell-vim'
+Plug 'lepture/vim-jinja'
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'MathSquared/vim-python-sql'
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'romgrk/nvim-treesitter-context'
 
 " markdown
-call minpac#add('godlygeek/tabular')
-call minpac#add('plasticboy/vim-markdown')
-call minpac#add('iamcco/markdown-preview.nvim', {'do': 'packloadall! | call mkdp#util#install()'})
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 " closers
-call minpac#add('rstacruz/vim-closer')
-call minpac#add('alvan/vim-closetag')
-call minpac#add('tpope/vim-endwise')
-call minpac#add('AndrewRadev/tagalong.vim')
+Plug 'rstacruz/vim-closer'
+Plug 'alvan/vim-closetag'
+Plug 'tpope/vim-endwise'
+Plug 'AndrewRadev/tagalong.vim'
 
 " tmux
-call minpac#add('christoomey/vim-tmux-navigator')
+Plug 'christoomey/vim-tmux-navigator'
 
 " other
-call minpac#add('tpope/vim-eunuch')
-call minpac#add('tpope/vim-sleuth')
-call minpac#add('Yggdroot/indentLine')
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-sleuth'
+Plug 'Yggdroot/indentLine'
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
 
-" minpac utility commands
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
-command! PackStatus call minpac#status()
+call plug#end()
 " }}}
 
 " theme {{{
@@ -79,12 +74,10 @@ hi SignColumn            ctermbg=NONE guibg=NONE
 hi CursorLineNr          ctermbg=NONE guibg=NONE
 hi StatusLineNC          ctermfg=NONE guibg=NONE
 hi VertSplit             ctermbg=NONE guibg=NONE
-hi CocErrorSign          ctermbg=NONE ctermfg=167 guifg=#d75f5f
-hi CocWarningSign        ctermbg=NONE ctermfg=208 guifg=#ff8700
-hi CocHintSign           ctermbg=NONE ctermfg=109 guifg=#87afaf
-hi link CocErrorFloat    CocErrorSign
-hi link CocWarningFloat  CocWarningSign
-hi link CocHintFloat     CocHintSign
+hi GruvboxRedSign        ctermbg=NONE guibg=NONE ctermfg=167 guifg=#fb4934
+hi GruvboxOrangeSign     ctermbg=NONE guibg=NONE ctermfg=208 guifg=#fe8019
+hi GruvboxBlueSign       ctermfg=NONE guibg=NONE ctermfg=109 guifg=#83a598
+hi GruvboxAquaSign       ctermbg=NONE guibg=NONE ctermfg=108 guifg=#8ec07c
 hi GitGutterAdd          guifg=#00875f ctermfg=2
 hi GitGutterChange       guifg=#ffff00 ctermfg=3
 hi GitGutterDelete       guifg=#ff5f00 ctermfg=2
@@ -239,6 +232,7 @@ endfunction
 let g:python3_host_prog='$HOME/.pyenv/versions/py3nvim/bin/python'
 
 let g:coc_global_extensions = [
+  \  'coc-yank',
   \  'coc-sql',
   \  'coc-git',
   \  'coc-lists',
@@ -255,9 +249,6 @@ let g:coc_global_extensions = [
   \  'coc-json',
   \  'coc-tsserver',
   \]
-
-" coc-yank clean on buff leave
-autocmd WinLeave * call coc#util#clear_pos_matches('^HighlightedyankRegion')
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -325,9 +316,9 @@ nmap <leader>qf  <Plug>(coc-fix-current)
 nmap [g <Plug>(coc-git-prevchunk)
 nmap ]g <Plug>(coc-git-nextchunk)
 " show chunk diff at current position
-nmap gds <Plug>(coc-git-chunkinfo)
+nmap <leader>gi <Plug>(coc-git-chunkinfo)
 " undo current chunk diff
-nmap gdu :CocCommand git.chunkUndo<CR>
+nmap <leader>gu :CocCommand git.chunkUndo<CR>
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -389,7 +380,7 @@ autocmd FileType python nnoremap <buffer> <leader>b Oimport ipdb; ipdb.set_trace
 
 " indentLine {{{
 autocmd Filetype json let g:indentLine_setConceal = 0
-autocmd FileType markdown let g:indentLine_enabled=0
+autocmd FileType markdown let g:indentLine_enabled = 0
 " }}}
 
 " tmux navigator {{{
