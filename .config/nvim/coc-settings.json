@@ -1,17 +1,18 @@
 {
-  "python.jediEnabled": false,
   "python.linting.enabled": true,
+  "pyright.organizeimports.provider": "isort",
+  "python.analysis.useLibraryCodeForTypes": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": ["--max-line-length=100"],
-  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Args": ["--max-line-length=115"],
+  "python.linting.pylintEnabled": false,
   "python.linting.pylintArgs": [
-    "--disable=C0103,C0114,C0115,C0116,W0703,W0621,W0611,W1203,I1101,R0903"
+    "--disable=C0103,C0114,C0115,C0116,W0703,W0612,W0621,W0611,W1203,I1101,R0903"
   ],
   "python.linting.prospectorEnabled": false,
-  "python.linting.mypyEnabled": true,
-  "python.formatting.provider": "yapf",
-  "python.formatting.yapfArgs": ["--style={ column_limit: 100 }"],
-  "python.envFile": "${workspaceFolder}/.vim/.env",
+  "python.linting.mypyEnabled": false,
+  "python.formatting.provider": "black",
+  "python.formatting.yapfArgs": ["--style={ column_limit: 115 }"],
+  "python.venvPath": "/Users/veselov_v/Library/Caches/pypoetry/virtualenvs",
   "diagnostic.checkCurrentLine": true,
   "git.addedSign.hlGroup": "GitGutterAdd",
   "git.changedSign.hlGroup": "GitGutterChange",
@@ -19,6 +20,7 @@
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
   "git.addGBlameToBufferVar": true,
+  "html.filetypes": ["html", "jinja.html"],
   "yaml.format.enable": true,
   "list.source.files.args": ["--hidden", "--files"],
   "list.source.files.excludePatterns": [

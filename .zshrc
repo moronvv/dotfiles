@@ -94,11 +94,13 @@ plugins=(
   zsh-syntax-highlighting
   zsh-completions
   z
+  poetry
 )
 
 source $ZSH/oh-my-zsh.sh
-setopt no_share_history
-unsetopt share_history
+setopt inc_append_history
+setopt hist_ignore_dups
+setopt hist_ignore_space
 
 # User configuration
 
@@ -163,3 +165,7 @@ eval "$(pyenv virtualenv-init -)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

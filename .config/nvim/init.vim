@@ -4,6 +4,7 @@ call plug#begin()
 " themes
 Plug 'gruvbox-community/gruvbox'
 Plug 'dracula/vim', {'as': 'dracula'}
+Plug 'arcticicestudio/nord-vim'
 
 " statusline
 Plug 'itchyny/lightline.vim'
@@ -32,10 +33,9 @@ Plug 'lyokha/vim-xkbswitch'
 Plug 'tpope/vim-vinegar'
 
 " ide
-Plug 'neoclide/coc.nvim' ", {'commit': 'ca248166d7bc5cf5d5a5ae624391f9a91be4dbec'}
-" Plug 'sheerun/vim-polyglot'
+Plug 'neoclide/coc.nvim'
+Plug 'sheerun/vim-polyglot'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'lepture/vim-jinja'
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'MathSquared/vim-python-sql'
 " Plug 'nvim-treesitter/nvim-treesitter'
@@ -44,7 +44,7 @@ Plug 'MathSquared/vim-python-sql'
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " closers
 Plug 'rstacruz/vim-closer'
@@ -54,6 +54,7 @@ Plug 'AndrewRadev/tagalong.vim'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 " other
 Plug 'tpope/vim-eunuch'
@@ -161,6 +162,7 @@ set splitbelow
 set nobackup
 set nowritebackup
 set noswapfile
+set autoread
 
 " save undo history
 set undofile
@@ -216,6 +218,10 @@ set pumblend=10
 set winblend=10
 " }}}
 
+" spellcheck {{{
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=ru_ru,en_us
+" }}}
+
 " netrw {{{
 let g:netrw_bufsettings = 'noma nomod nu nobl nowrap ro'
 augroup netrw_mapping
@@ -240,7 +246,7 @@ let g:coc_global_extensions = [
   \  'coc-prettier',
   \  'coc-emmet',
   \  'coc-yank',
-  \  'coc-python',
+  \  'coc-pyright',
   \  'coc-snippets',
   \  'coc-sh',
   \  'coc-docker',
@@ -265,7 +271,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-" inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <C-e> coc#refresh()
 
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [p <Plug>(coc-diagnostic-prev)
@@ -361,6 +367,8 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Fuzzy find files.
+nnoremap <silent><nowait> <M-p>     :<C-u>CocList mru<CR>
+" Fuzzy find files.
 nnoremap <silent><nowait> <C-p>     :<C-u>CocList files<CR>
 " Fuzzy find grep.
 nnoremap <silent><nowait> <space>p  :<C-u>CocList grep<CR>
@@ -389,7 +397,7 @@ let g:tmux_navigator_save_on_switch = 2
 
 " fugitive {{{
 set diffopt+=vertical
-nmap <leader>gs :Gstatus<CR>
+nmap <leader>gs :Git<CR>
 " }}}
 
 " xkb-switch {{{
