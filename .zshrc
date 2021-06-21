@@ -75,6 +75,8 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # export FZF_BASE=/usr/bin/fzf
 export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 
+export AUTOSWITCH_SILENT=1
+
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
@@ -95,6 +97,7 @@ plugins=(
   zsh-completions
   z
   poetry
+  autoswitch_virtualenv
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -146,6 +149,7 @@ export VISUAL="nvim"
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 
 # brew
 export PATH="/usr/local/sbin:$PATH"
@@ -153,6 +157,9 @@ export PATH="/usr/local/sbin:$PATH"
 # haskell config
 export PATH="$HOME/.local/bin:$PATH"
 #eval "$(stack --bash-completion-script stack)"
+
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
@@ -165,7 +172,5 @@ eval "$(pyenv virtualenv-init -)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env
-
-export PATH="$HOME/.poetry/bin:$PATH"
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
