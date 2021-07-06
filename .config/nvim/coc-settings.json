@@ -3,7 +3,7 @@
   "pyright.organizeimports.provider": "isort",
   "python.analysis.useLibraryCodeForTypes": true,
   "python.linting.flake8Enabled": true,
-  "python.linting.flake8Args": ["--max-line-length=115"],
+  "python.linting.flake8Args": ["--max-line-length=115", "--ignore=F401"],
   "python.linting.pylintEnabled": false,
   "python.linting.pylintArgs": [
     "--disable=C0103,C0114,C0115,C0116,W0703,W0612,W0621,W0611,W1203,I1101,R0903"

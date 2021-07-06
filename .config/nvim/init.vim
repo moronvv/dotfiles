@@ -2,7 +2,7 @@
 call plug#begin()
 
 " themes
-Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'dracula/vim', {'as': 'dracula'}
 Plug 'arcticicestudio/nord-vim'
 
@@ -34,12 +34,9 @@ Plug 'tpope/vim-vinegar'
 
 " ide
 Plug 'neoclide/coc.nvim'
-Plug 'sheerun/vim-polyglot'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'romgrk/nvim-treesitter-context'
 Plug 'neovimhaskell/haskell-vim'
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
-Plug 'MathSquared/vim-python-sql'
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'romgrk/nvim-treesitter-context'
 
 " markdown
 Plug 'godlygeek/tabular'
@@ -60,7 +57,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-sleuth'
 Plug 'Yggdroot/indentLine'
-" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(1) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 " }}}
@@ -68,21 +65,25 @@ call plug#end()
 " theme {{{
 syntax on
 set background=dark
-colorscheme gruvbox
-hi Normal                ctermbg=NONE guibg=NONE
-hi LineNr                ctermbg=NONE guibg=NONE
-hi SignColumn            ctermbg=NONE guibg=NONE
-hi CursorLineNr          ctermbg=NONE guibg=NONE
-hi StatusLineNC          ctermfg=NONE guibg=NONE
-hi VertSplit             ctermbg=NONE guibg=NONE
-hi GruvboxRedSign        ctermbg=NONE guibg=NONE ctermfg=167 guifg=#fb4934
-hi GruvboxOrangeSign     ctermbg=NONE guibg=NONE ctermfg=208 guifg=#fe8019
-hi GruvboxBlueSign       ctermfg=NONE guibg=NONE ctermfg=109 guifg=#83a598
-hi GruvboxAquaSign       ctermbg=NONE guibg=NONE ctermfg=108 guifg=#8ec07c
-hi GitGutterAdd          guifg=#00875f ctermfg=2
-hi GitGutterChange       guifg=#ffff00 ctermfg=3
-hi GitGutterDelete       guifg=#ff5f00 ctermfg=2
-hi GitGutterChangeDelete guifg=#0087ff ctermfg=4
+let g:gruvbox_material_palette = 'original'
+colorscheme gruvbox-material
+hi Normal                       ctermbg=NONE guibg=NONE
+hi EndOfBuffer                  ctermbg=NONE guibg=NONE
+hi LineNr                       ctermbg=NONE guibg=NONE
+hi SignColumn                   ctermbg=NONE guibg=NONE
+hi CursorLineNr                 ctermbg=NONE guibg=NONE
+hi StatusLineNC                 ctermfg=NONE guibg=NONE
+hi VertSplit                    ctermbg=NONE guibg=NONE
+hi RedSign                      ctermbg=NONE guibg=NONE ctermfg=167 guifg=#fb4934
+hi YellowSign                   ctermbg=NONE guibg=NONE ctermfg=208 guifg=#fe8019
+hi BlueSign                     ctermfg=NONE guibg=NONE ctermfg=109 guifg=#83a598
+hi AquaSign                     ctermbg=NONE guibg=NONE ctermfg=108 guifg=#8ec07c
+hi CocGitAddedSign              guifg=#00875f ctermfg=2
+hi CocGitChangedSign            guifg=#ffff00 ctermfg=3
+hi CocGitRemovedSign            guifg=#ff5f00 ctermfg=2
+hi CocGitTopRemovedSign         guifg=#ff5f00 ctermfg=2
+hi CocGitChangeRemovedSign      guifg=#0087ff ctermfg=4
+hi link HighlightedyankRegion Substitute
 " }}}
 
 " lightline {{{
@@ -90,7 +91,7 @@ set laststatus=2
 set noshowmode
 
 let g:lightline = {
-      \  'colorscheme': 'gruvbox',
+      \  'colorscheme': 'gruvbox_material',
       \  'active': {
       \    'left':  [
       \               [ 'mode', 'paste' ],
@@ -178,7 +179,9 @@ set incsearch
 set inccommand=nosplit
 
 " fold
-set nofoldenable
+set foldlevel=20
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " other
 set history=1000
@@ -317,6 +320,7 @@ augroup end
 
 " Apply AutoFix to problem on the current line.
 nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>qa  :CocAction<CR>
 
 " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
@@ -374,14 +378,6 @@ nnoremap <silent><nowait> <C-p>     :<C-u>CocList files<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocList grep<CR>
 " }}}
 
-" semshi {{{
-let g:semshi#mark_selected_nodes = 0
-let g:semshi#error_sign = v:false
-let g:semshi#always_update_all_highlights = v:true
-" highlight fix
-autocmd BufEnter * :syntax sync fromstart
-" }}}
-
 " python {{{
 autocmd FileType python nnoremap <buffer> <leader>b Oimport ipdb; ipdb.set_trace()<Esc> " pdb
 " }}}
@@ -389,6 +385,10 @@ autocmd FileType python nnoremap <buffer> <leader>b Oimport ipdb; ipdb.set_trace
 " indentLine {{{
 autocmd Filetype json let g:indentLine_setConceal = 0
 autocmd FileType markdown let g:indentLine_enabled = 0
+" }}}
+
+" markdown {{{
+autocmd FileType markdown let g:conceallevel = 0
 " }}}
 
 " tmux navigator {{{
@@ -402,6 +402,20 @@ nmap <leader>gs :Git<CR>
 
 " xkb-switch {{{
 let g:XkbSwitchEnabled = 1
+" }}}
+
+" treesitter {{{
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+}
+require'treesitter-context.config'.setup{
+    enable = true,
+}
+EOF
 " }}}
 
 " vim:fdm=marker
