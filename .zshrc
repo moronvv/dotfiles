@@ -159,10 +159,17 @@ export PATH="$HOME/.local/bin:$PATH"
 #eval "$(stack --bash-completion-script stack)"
 
 # poetry
-export PATH="$HOME/.poetry/bin:$PATH"
 
+# ipdb
+export PYTHONBREAKPOINT=ipdb.set_trace
+
+# pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# direnv
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh) > /dev/null"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -174,3 +181,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
+
+export PATH="$HOME/.poetry/bin:$PATH"

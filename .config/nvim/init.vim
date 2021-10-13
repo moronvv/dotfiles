@@ -33,10 +33,12 @@ Plug 'lyokha/vim-xkbswitch'
 Plug 'tpope/vim-vinegar'
 
 " ide
-Plug 'neoclide/coc.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocUpdate'}
 Plug 'romgrk/nvim-treesitter-context'
 Plug 'neovimhaskell/haskell-vim'
+
+" treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " markdown
 Plug 'godlygeek/tabular'
@@ -51,19 +53,24 @@ Plug 'AndrewRadev/tagalong.vim'
 
 " tmux
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'tmux-plugins/vim-tmux-focus-events'
+
+" database
+Plug 'tpope/vim-dadbod'
+Plug 'kristijanhusak/vim-dadbod-ui'
+Plug 'lifepillar/pgsql.vim'
 
 " other
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-sleuth'
 Plug 'Yggdroot/indentLine'
+Plug 'simnalamburt/vim-mundo'
+Plug 'felipec/vim-sanegx'
 " Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
 call plug#end()
 " }}}
 
 " theme {{{
-syntax on
 set background=dark
 let g:gruvbox_material_palette = 'original'
 colorscheme gruvbox-material
@@ -91,34 +98,34 @@ set laststatus=2
 set noshowmode
 
 let g:lightline = {
-      \  'colorscheme': 'gruvbox_material',
-      \  'active': {
-      \    'left':  [
-      \               [ 'mode', 'paste' ],
-      \               [ 'gitbranch', 'filename', 'modified' ],
-      \               ['coclintstatus', 'cocstatus'],
-      \             ],
-      \    'right': [
-      \               [ 'lineinfo' ],
-      \               [ 'filetype' ],
-      \             ]
-      \  },
-      \  'component_function': {
-      \    'lint_status': 'CocCurrentFunction',
-      \    'gitbranch': 'LightlineGitBranch',
-      \    'filetype': 'LightlineFiletype',
-      \    'fileformat': 'LightlineFileformat',
-      \    'fileencoding': 'LightlineFileencoding',
-      \    'coclintstatus': 'LightlineCocLintStatus',
-      \    'cocstatus': 'LightlineCocStatus',
-      \  },
-      \  'component_expand': {
-      \    'buffers': 'lightline#bufferline#buffers',
-      \  },
-      \  'component_type': {
-      \    'buffers': 'tabsel',
-      \  }
-      \ }
+\  'colorscheme': 'gruvbox_material',
+\  'active': {
+\    'left':  [
+\               [ 'mode', 'paste' ],
+\               [ 'gitbranch', 'filename', 'modified' ],
+\               [ 'coclintstatus', 'cocstatus' ],
+\             ],
+\    'right': [
+\               [ 'lineinfo' ],
+\               [ 'filetype' ],
+\             ]
+\  },
+\  'component_function': {
+\    'gitbranch': 'LightlineGitBranch',
+\    'filetype': 'LightlineFiletype',
+\    'fileformat': 'LightlineFileformat',
+\    'fileencoding': 'LightlineFileencoding',
+\    'coclintstatus': 'LightlineCocLintStatus',
+\    'cocstatus': 'LightlineCocStatus',
+\    'obsessionstatus': 'ObsessionStatus',
+\  },
+\  'component_expand': {
+\    'buffers': 'lightline#bufferline#buffers',
+\  },
+\  'component_type': {
+\    'buffers': 'tabsel',
+\  }
+\}
 
 function! LightlineGitBranch() abort
   return get(g:, 'coc_git_status', '')
@@ -242,7 +249,6 @@ let g:python3_host_prog='$HOME/.pyenv/versions/py3nvim/bin/python'
 
 let g:coc_global_extensions = [
   \  'coc-yank',
-  \  'coc-sql',
   \  'coc-git',
   \  'coc-lists',
   \  'coc-marketplace',
@@ -257,6 +263,7 @@ let g:coc_global_extensions = [
   \  'coc-yaml',
   \  'coc-json',
   \  'coc-tsserver',
+  \  'coc-db',
   \]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -274,7 +281,7 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <C-e> coc#refresh()
+" inoremap <silent><expr> <C-e> coc#refresh()
 
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
 nmap <silent> [p <Plug>(coc-diagnostic-prev)
@@ -282,8 +289,8 @@ nmap <silent> ]p <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
+" nmap <silent> gy <Plug>(coc-type-definition)
+" nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
@@ -379,7 +386,7 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocList grep<CR>
 " }}}
 
 " python {{{
-autocmd FileType python nnoremap <buffer> <leader>b Oimport ipdb; ipdb.set_trace()<Esc> " pdb
+autocmd FileType python nnoremap <buffer> <leader>b Obreakpoint()<Esc> " pdb
 " }}}
 
 " indentLine {{{
@@ -404,6 +411,29 @@ nmap <leader>gs :Git<CR>
 let g:XkbSwitchEnabled = 1
 " }}}
 
+" mundo {{{
+nnoremap <leader>mt :MundoToggle<CR>
+let g:mundo_preview_bottom = 1
+" }}}
+
+" dadbod {{{
+let g:db_ui_winwidth = 50
+let g:db_ui_execute_on_save = 0
+let g:db_ui_force_echo_notifications = 1
+let g:db_ui_use_nerd_fonts = 1
+autocmd Filetype dbui set ts=2 sw=2 sts=2 et
+" operator pending sql
+vnoremap <silent> aq :call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create<bar>drop<bar>truncate<bar>explain<bar>set<bar>analyze<bar>vacuum<bar>grant<bar>alter)\>", "Wz")<cr>vg`'
+" vnoremap <silent> aq :call search(";", "c")<CR>:call search("\\v\\c^(select\|with\|insert\|update\|delete\|create\|drop\|truncate\|explain\|set\|analyze\|vacuum\|grant\|alter)", "bs")<CR>vg`'
+onoremap <silent> aq :normal vaq<cr>
+" run sql under cursor
+autocmd FileType sql nnoremap <silent> <leader>rq :exec "norm vaq \<Plug>(DBUI_ExecuteQuery)"<CR>
+" }}}
+
+" pgsql {{{
+let g:sql_type_default = 'pgsql'
+" }}}
+
 " treesitter {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -412,6 +442,7 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   },
 }
+
 require'treesitter-context.config'.setup{
     enable = true,
 }
