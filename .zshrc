@@ -101,6 +101,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+
+export HISTSIZE=10000
+export SAVEHIST=10000
 setopt inc_append_history
 setopt hist_ignore_dups
 setopt hist_ignore_space

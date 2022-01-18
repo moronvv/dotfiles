@@ -43,7 +43,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " closers
 Plug 'rstacruz/vim-closer'
@@ -405,6 +405,8 @@ let g:tmux_navigator_save_on_switch = 2
 " fugitive {{{
 set diffopt+=vertical
 nmap <leader>gs :Git<CR>
+" highlight fix
+autocmd BufEnter * :syntax sync fromstart
 " }}}
 
 " xkb-switch {{{
