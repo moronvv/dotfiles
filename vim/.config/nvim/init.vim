@@ -33,17 +33,17 @@ Plug 'lyokha/vim-xkbswitch'
 Plug 'tpope/vim-vinegar'
 
 " ide
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': ':CocUpdate'}
-Plug 'romgrk/nvim-treesitter-context'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovimhaskell/haskell-vim'
 
 " treesitter
+Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
 
 " closers
 Plug 'rstacruz/vim-closer'
@@ -61,7 +61,7 @@ Plug 'lifepillar/pgsql.vim'
 
 " other
 Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-sleuth'
+" Plug 'tpope/vim-sleuth'
 Plug 'Yggdroot/indentLine'
 Plug 'simnalamburt/vim-mundo'
 Plug 'felipec/vim-sanegx'
@@ -354,7 +354,7 @@ nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
+command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
