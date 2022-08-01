@@ -37,16 +37,17 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovimhaskell/haskell-vim'
 
 " treesitter
-Plug 'romgrk/nvim-treesitter-context'
+" Plug 'romgrk/nvim-treesitter-context'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " markdown
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
+" Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 
 " closers
-Plug 'rstacruz/vim-closer'
+" Plug 'rstacruz/vim-closer'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-endwise'
 Plug 'AndrewRadev/tagalong.vim'
@@ -270,22 +271,24 @@ let g:coc_global_extensions = [
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-function! s:check_back_space() abort
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-" inoremap <silent><expr> <C-e> coc#refresh()
-
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [p <Plug>(coc-diagnostic-prev)
-nmap <silent> ]p <Plug>(coc-diagnostic-next)
+nmap <silent> [d <Plug>(coc-diagnostic-prev)
+nmap <silent> ]d <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -313,6 +316,9 @@ nmap <leader>rn <Plug>(coc-rename)
 " Formatting code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  :Format<CR>
+
+" Restart Coc
+nmap <leader>gcr :CocRestart<CR>
 
 " Set interpreter
 nmap <leader>si :CocCommand python.setInterpreter<CR>
@@ -395,7 +401,7 @@ autocmd FileType markdown let g:indentLine_enabled = 0
 " }}}
 
 " markdown {{{
-autocmd FileType markdown let g:conceallevel = 0
+autocmd FileType markdown set conceallevel=0
 " }}}
 
 " tmux navigator {{{
@@ -425,7 +431,7 @@ let g:db_ui_force_echo_notifications = 1
 let g:db_ui_use_nerd_fonts = 1
 autocmd Filetype dbui set ts=2 sw=2 sts=2 et
 " operator pending sql
-vnoremap <silent> aq :call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create<bar>drop<bar>truncate<bar>explain<bar>set<bar>analyze<bar>vacuum<bar>grant<bar>alter)\>", "Wz")<cr>vg`'
+vnoremap <silent> aq :call search(";", "cWz")<cr>:call search(";\\<bar>\\%^", "bsWz")<cr>:call search("\\v\\c^(select<bar>with<bar>insert<bar>update<bar>delete<bar>create<bar>drop<bar>truncate<bar>explain<bar>set<bar>analyze<bar>vacuum<bar>grant<bar>alter<bar>show)\>", "Wz")<cr>vg`'
 " vnoremap <silent> aq :call search(";", "c")<CR>:call search("\\v\\c^(select\|with\|insert\|update\|delete\|create\|drop\|truncate\|explain\|set\|analyze\|vacuum\|grant\|alter)", "bs")<CR>vg`'
 onoremap <silent> aq :normal vaq<cr>
 " run sql under cursor
@@ -439,14 +445,10 @@ let g:sql_type_default = 'pgsql'
 " treesitter {{{
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true,
   },
-}
-
-require'treesitter-context.config'.setup{
-    enable = true,
 }
 EOF
 " }}}
