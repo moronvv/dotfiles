@@ -23,6 +23,7 @@
   "git.addGBlameToBufferVar": true,
   "html.filetypes": ["html", "jinja.html"],
   "yaml.format.enable": true,
+  "suggest.noselect": true,
   "list.source.files.args": ["--hidden", "--files"],
   "list.source.files.excludePatterns": [
     "**/.git/**",
