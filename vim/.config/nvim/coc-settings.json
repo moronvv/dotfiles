@@ -1,5 +1,5 @@
 {
-  "semanticTokens.filetypes": ["*"],
+  "semanticTokens.enable": true,
   "python.linting.enabled": true,
   "pyright.organizeimports.provider": "isort",
   "python.analysis.useLibraryCodeForTypes": true,
