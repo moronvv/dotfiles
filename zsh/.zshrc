@@ -96,7 +96,6 @@ plugins=(
   zsh-syntax-highlighting
   zsh-completions
   z
-  poetry
   autoswitch_virtualenv
 )
 
@@ -172,7 +171,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # direnv
 export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh) > /dev/null"
+eval "$(direnv hook zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
