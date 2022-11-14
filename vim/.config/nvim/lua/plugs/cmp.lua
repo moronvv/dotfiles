@@ -9,6 +9,7 @@ end
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -18,10 +19,7 @@ cmp.setup {
   },
   mapping = {
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      select = true,
-      behavior = cmp.ConfirmBehavior.Replace,
-    },
+    ['<CR>'] = cmp.mapping.confirm(),
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -33,7 +31,6 @@ cmp.setup {
         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
       end
     end, { "i", "s" }),
-
     ["<S-Tab>"] = cmp.mapping(function()
       if cmp.visible() then
         cmp.select_prev_item()

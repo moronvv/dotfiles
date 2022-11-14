@@ -19,6 +19,8 @@ vim.api.nvim_exec(
 
 require('packer').startup(function()
 	use 'wbthomason/packer.nvim' -- Package manager
+
+	-- miscs
 	use 'tpope/vim-fugitive' -- Git commands in nvim
 	use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
 	use 'tpope/vim-surround'
@@ -29,35 +31,45 @@ require('packer').startup(function()
 	use 'tpope/vim-sleuth'
 	use 'tpope/vim-obsession'
 
-	-- Autosave
-	use '907th/vim-auto-save'
-
-	-- Disables highlighting after search
-	use 'romainl/vim-cool'
-
 	-- UI to select things (files, grep results, open buffers...)
-	use { 'nvim-telescope/telescope.nvim', requires = {
-		'nvim-lua/plenary.nvim',
-		'BurntSushi/ripgrep',
-		{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-	}
+	use {
+		'nvim-telescope/telescope.nvim', requires = {
+			'nvim-lua/plenary.nvim',
+			'BurntSushi/ripgrep',
+			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+		}
 	}
 
+	-- themes
+	use 'sainnhe/gruvbox-material'
+	use 'bluz71/vim-nightfly-colors'
+
+	-- statusline
 	use 'itchyny/lightline.vim' -- Fancier statusline
 
-	use 'sainnhe/gruvbox-material'
+	-- autosave
+	use '907th/vim-auto-save'
 
-	-- Add git related info in the signs columns and popups
+	-- disables highlighting after search
+	use 'romainl/vim-cool'
+
+	-- git signs
 	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
-	-- Highlight, edit, and navigate code using a fast incremental parsing library
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	-- Additional textobjects for treesitter
-	use 'nvim-treesitter/nvim-treesitter-textobjects'
+	-- autoclose pairs
+	-- use 'windwp/nvim-autopairs'
+	use 'rstacruz/vim-closer'
 
+	-- LSP
 	use 'williamboman/mason.nvim'
 	use 'williamboman/mason-lspconfig.nvim'
 	use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+
+	-- highlight, edit, and navigate code using a fast incremental parsing library
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use 'nvim-treesitter/nvim-treesitter-textobjects'
+	use 'nvim-treesitter/nvim-treesitter-context'
+	use 'RRethy/nvim-treesitter-endwise'
 
 	-- autocompletion
 	use 'hrsh7th/cmp-nvim-lsp'
@@ -67,8 +79,6 @@ require('packer').startup(function()
 	use 'hrsh7th/nvim-cmp'
 
 	-- snippets
-	-- use 'L3MON4D3/LuaSnip'
-	-- use 'saadparwaiz1/cmp_luasnip'
 	use 'hrsh7th/cmp-vsnip'
 	use 'hrsh7th/vim-vsnip'
 	use 'rafamadriz/friendly-snippets'

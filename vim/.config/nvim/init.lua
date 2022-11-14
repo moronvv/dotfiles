@@ -70,7 +70,7 @@ vim.o.lazyredraw = true
 -- Set colorscheme defaults (order is important here).
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd [[colorscheme gruvbox-material]]
+vim.cmd [[ colorscheme nightfly ]]
 
 -- Hide ~ at the end of file
 vim.o.fillchars = 'eob: '
@@ -81,7 +81,7 @@ vim.o.winblend = 10
 
 -- Set status bar settings.
 vim.g.lightline = {
-  colorscheme = 'gruvbox_material',
+  colorscheme = 'nightfly',
   active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
   component_function = { gitbranch = 'fugitive#head' },
 }

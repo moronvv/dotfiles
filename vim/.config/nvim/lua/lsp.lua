@@ -75,7 +75,7 @@ local servers = {
         },
         telemetry = { enable = false },
       }
-    }
+    },
   }
 }
 
@@ -92,6 +92,7 @@ for server, confs in pairs(servers) do
     filetypes = confs.filetypes,
     init_options = confs.init_options,
     settings = confs.settings,
+    format = confs.format,
   }
 end
 

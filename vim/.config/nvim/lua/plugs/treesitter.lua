@@ -6,6 +6,9 @@ require('nvim-treesitter.configs').setup {
     enable = true, -- false will disable the whole extension
   },
   indent = {
+    enable = false,
+  },
+  endwise = {
     enable = true,
   },
   textobjects = {
