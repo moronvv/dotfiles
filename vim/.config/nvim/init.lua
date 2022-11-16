@@ -2,12 +2,14 @@ require("plugins")
 require("keybindings")
 require("lsp")
 
+require("plugs.lightline")
 require("plugs.treesitter")
 require("plugs.cmp")
 require("plugs.telescope")
 require("plugs.gitsigns")
 require("plugs.fugitive")
 require("plugs.autosave")
+require("plugs.indentline")
 
 -- Incremental live completion (note: this is now a default on master).
 vim.o.hlsearch = true
@@ -78,13 +80,6 @@ vim.o.fillchars = 'eob: '
 -- Transparency
 vim.o.pumblend = 10
 vim.o.winblend = 10
-
--- Set status bar settings.
-vim.g.lightline = {
-  colorscheme = 'nightfly',
-  active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
-  component_function = { gitbranch = 'fugitive#head' },
-}
 
 -- Highlight on yank (copy). It will do a nice highlight blink of the thing you just copied.
 vim.api.nvim_exec(

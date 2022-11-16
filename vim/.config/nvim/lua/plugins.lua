@@ -30,6 +30,8 @@ require('packer').startup(function()
 	use 'tpope/vim-vinegar'
 	use 'tpope/vim-sleuth'
 	use 'tpope/vim-obsession'
+	use 'nelstrom/vim-visual-star-search' -- star serch on visual selection
+	use 'felipec/vim-sanegx' -- fix gx link opener
 
 	-- UI to select things (files, grep results, open buffers...)
 	use {
@@ -43,6 +45,9 @@ require('packer').startup(function()
 	-- themes
 	use 'sainnhe/gruvbox-material'
 	use 'bluz71/vim-nightfly-colors'
+
+	-- indent
+	use 'Yggdroot/indentLine'
 
 	-- statusline
 	use 'itchyny/lightline.vim' -- Fancier statusline
