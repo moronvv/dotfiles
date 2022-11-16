@@ -28,14 +28,6 @@ local on_attach = function(_, bufnr)
   vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-
-  vim.keymap.set('n', 'gd', [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
-  vim.keymap.set('n', '<space>D', [[<cmd>lua require('telescope.builtin').lsp_type_definitions()<CR>]], opts)
-  vim.keymap.set('n', 'gi', [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
-  vim.keymap.set('n', 'gr', [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
-  vim.keymap.set('n', '<space>sd', [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
-  vim.keymap.set('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.keymap.set('n', '<leader>sw', [[<cmd>lua require('telescope.builtin').lsp_dynamic_workspace_symbols()<CR>]], opts)
 end
 
 -- Make runtime files discoverable to the server
