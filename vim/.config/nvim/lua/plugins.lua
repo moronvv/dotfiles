@@ -47,13 +47,20 @@ require('packer').startup(function()
 	use 'bluz71/vim-nightfly-colors'
 
 	-- indent
-	use 'Yggdroot/indentLine'
+	-- use 'Yggdroot/indentLine'
+	use 'lukas-reineke/indent-blankline.nvim'
 
 	-- statusline
-	use 'itchyny/lightline.vim' -- Fancier statusline
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
 
 	-- autosave
 	use '907th/vim-auto-save'
+
+	-- tmux
+	use 'christoomey/vim-tmux-navigator'
 
 	-- disables highlighting after search
 	use 'romainl/vim-cool'

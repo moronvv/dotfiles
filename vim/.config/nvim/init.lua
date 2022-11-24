@@ -2,14 +2,14 @@ require("plugins")
 require("keybindings")
 require("lsp")
 
-require("plugs.lightline")
+require("plugs.lualine")
 require("plugs.treesitter")
 require("plugs.cmp")
 require("plugs.telescope")
 require("plugs.gitsigns")
 require("plugs.fugitive")
 require("plugs.autosave")
-require("plugs.indentline")
+require("plugs.indent_blankline")
 
 -- Incremental live completion (note: this is now a default on master).
 vim.o.hlsearch = true
@@ -72,7 +72,7 @@ vim.o.lazyredraw = true
 -- Set colorscheme defaults (order is important here).
 vim.o.termguicolors = true
 vim.o.background = 'dark'
-vim.cmd [[ colorscheme nightfly ]]
+vim.cmd [[ colorscheme gruvbox-material ]]
 
 -- Hide ~ at the end of file
 vim.o.fillchars = 'eob: '
@@ -81,13 +81,13 @@ vim.o.fillchars = 'eob: '
 vim.o.pumblend = 10
 vim.o.winblend = 10
 
--- Highlight on yank (copy). It will do a nice highlight blink of the thing you just copied.
+-- Highlight on yank
 vim.api.nvim_exec(
   [[
-  augroup YankHighlight
+  augroup highlight_yank
     autocmd!
-    autocmd TextYankPost * silent! lua vim.highlight.on_yank()
-  augroup end
+    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
+  augroup END
   ]],
   false
 )
