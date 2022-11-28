@@ -57,6 +57,7 @@ require("packer").startup(
       "nvim-lualine/lualine.nvim",
       requires = { "kyazdani42/nvim-web-devicons", opt = true },
     }
+    use "arkav/lualine-lsp-progress"
 
     -- autosave
     use "907th/vim-auto-save"

@@ -50,7 +50,9 @@ vim.wo.signcolumn = "yes"
 
 -- Show line diagnostics automatically in hover window
 vim.diagnostic.config({ virtual_text = false })
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+vim.cmd [[ 
+  autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
+]]
 
 -- Autowrite and autoread files
 vim.o.autowrite = true
