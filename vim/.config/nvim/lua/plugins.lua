@@ -1,99 +1,106 @@
--- PLUGINS
-
 -- Install packer.
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath "data"
+                       .. "/site/pack/packer/start/packer.nvim"
 
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	vim.fn.execute('!git clone https://github.com/wbthomason/packer.nvim ' .. install_path)
+  vim.fn.execute(
+    "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
+  )
 end
 
 vim.api.nvim_exec(
-	[[
-	  augroup Packer
-	    autocmd!
-	    autocmd BufWritePost init.lua PackerCompile
-	  augroup end
-	]],
-	false
+  [[
+      augroup Packer
+        autocmd!
+        autocmd BufWritePost init.lua PackerCompile
+      augroup end
+    ]], false
 )
 
-require('packer').startup(function()
-	use 'wbthomason/packer.nvim' -- Package manager
+require("packer").startup(
+  function()
+    use "wbthomason/packer.nvim" -- Package manager
 
-	-- miscs
-	use 'tpope/vim-fugitive' -- Git commands in nvim
-	use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-	use 'tpope/vim-surround'
-	use 'tpope/vim-unimpaired'
-	use 'tpope/vim-repeat'
-	use 'tpope/vim-abolish'
-	use 'tpope/vim-vinegar'
-	use 'tpope/vim-sleuth'
-	use 'tpope/vim-obsession'
-	use 'nelstrom/vim-visual-star-search' -- star serch on visual selection
-	use 'felipec/vim-sanegx' -- fix gx link opener
+    -- miscs
+    use "tpope/vim-fugitive" -- Git commands in nvim
+    use "tpope/vim-commentary" -- "gc" to comment visual regions/lines
+    use "tpope/vim-surround"
+    use "tpope/vim-unimpaired"
+    use "tpope/vim-repeat"
+    use "tpope/vim-abolish"
+    use "tpope/vim-vinegar"
+    use "tpope/vim-sleuth"
+    use "tpope/vim-obsession"
+    use "tpope/vim-eunuch"
+    use "nelstrom/vim-visual-star-search" -- star serch on visual selection
+    use "felipec/vim-sanegx" -- fix gx link opener
 
-	-- UI to select things (files, grep results, open buffers...)
-	use {
-		'nvim-telescope/telescope.nvim', requires = {
-			'nvim-lua/plenary.nvim',
-			'BurntSushi/ripgrep',
-			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-		}
-	}
+    -- UI to select things (files, grep results, open buffers...)
+    use {
+      "nvim-telescope/telescope.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim", "BurntSushi/ripgrep",
+        { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      },
+    }
 
-	-- themes
-	use 'sainnhe/gruvbox-material'
-	use 'bluz71/vim-nightfly-colors'
+    -- themes
+    use "sainnhe/gruvbox-material"
+    use "bluz71/vim-nightfly-colors"
 
-	-- indent
-	-- use 'Yggdroot/indentLine'
-	use 'lukas-reineke/indent-blankline.nvim'
+    -- indent
+    -- use 'Yggdroot/indentLine'
+    use "lukas-reineke/indent-blankline.nvim"
 
-	-- statusline
-	use {
-		'nvim-lualine/lualine.nvim',
-		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-	}
+    -- statusline
+    use {
+      "nvim-lualine/lualine.nvim",
+      requires = { "kyazdani42/nvim-web-devicons", opt = true },
+    }
 
-	-- autosave
-	use '907th/vim-auto-save'
+    -- autosave
+    use "907th/vim-auto-save"
 
-	-- tmux
-	use 'christoomey/vim-tmux-navigator'
+    -- tmux
+    use "christoomey/vim-tmux-navigator"
 
-	-- disables highlighting after search
-	use 'romainl/vim-cool'
+    -- lang switch
+    use "lyokha/vim-xkbswitch"
 
-	-- git signs
-	use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    -- disables highlighting after search
+    use "romainl/vim-cool"
 
-	-- autoclose pairs
-	-- use 'windwp/nvim-autopairs'
-	use 'rstacruz/vim-closer'
+    -- git signs
+    use { "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } }
 
-	-- LSP
-	use 'williamboman/mason.nvim'
-	use 'williamboman/mason-lspconfig.nvim'
-	use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
+    -- autoclose pairs
+    -- use 'windwp/nvim-autopairs'
+    use "rstacruz/vim-closer"
 
-	-- highlight, edit, and navigate code using a fast incremental parsing library
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	use 'nvim-treesitter/nvim-treesitter-textobjects'
-	use 'nvim-treesitter/nvim-treesitter-context'
-	use 'RRethy/nvim-treesitter-endwise'
+    -- LSP
+    use "williamboman/mason.nvim"
+    use "williamboman/mason-lspconfig.nvim"
+    use "WhoIsSethDaniel/mason-tool-installer.nvim"
+    use "neovim/nvim-lspconfig" -- Collection of configurations for built-in LSP client
 
-	-- autocompletion
-	use 'hrsh7th/cmp-nvim-lsp'
-	use 'hrsh7th/cmp-buffer'
-	use 'hrsh7th/cmp-path'
-	use 'hrsh7th/cmp-cmdline'
-	use 'hrsh7th/nvim-cmp'
+    -- highlight, edit, and navigate code using a fast incremental parsing library
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    use "nvim-treesitter/nvim-treesitter-textobjects"
+    use "nvim-treesitter/nvim-treesitter-context"
+    use "RRethy/nvim-treesitter-endwise"
 
-	-- snippets
-	use 'hrsh7th/cmp-vsnip'
-	use 'hrsh7th/vim-vsnip'
-	use 'rafamadriz/friendly-snippets'
+    -- autocompletion
+    use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-path"
+    use "hrsh7th/cmp-cmdline"
+    use "hrsh7th/nvim-cmp"
 
-	use { 'mcchrish/zenbones.nvim', requires = 'rktjmp/lush.nvim' }
-end)
+    -- snippets
+    use "hrsh7th/cmp-vsnip"
+    use "hrsh7th/vim-vsnip"
+    use "rafamadriz/friendly-snippets"
+
+    use { "mcchrish/zenbones.nvim", requires = "rktjmp/lush.nvim" }
+  end
+)
