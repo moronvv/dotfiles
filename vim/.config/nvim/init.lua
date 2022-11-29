@@ -1,7 +1,7 @@
 require("plugins")
 require("keybindings")
-require("lsp")
 
+require("plugs.lsp")
 require("plugs.xkbswitch")
 require("plugs.lualine")
 require("plugs.treesitter")
