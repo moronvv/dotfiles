@@ -15,3 +15,14 @@ vim.keymap.set("n", "<C-l>", "<C-w>l")
 
 -- Reload configuration without restart nvim
 vim.keymap.set("n", "<leader>r", ":so %<CR>")
+
+-- Highlight on yank
+vim.api.nvim_exec(
+  [[
+    augroup highlight_yank
+      autocmd!
+      au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
+    augroup END
+  ]],
+  false
+)

@@ -120,5 +120,4 @@ for server, confs in pairs(servers) do
 end
 
 -- Set completeopt to have a better completion experience
--- vim.o.completeopt = 'menu,noselect,preview'
-vim.opt.completeopt = { "menu", "noselect", "preview" }
+vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
