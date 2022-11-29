@@ -1,4 +1,4 @@
-local nvim_lsp = require "lspconfig"
+local nvim_lsp = require("lspconfig")
 
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -21,16 +21,14 @@ local on_attach = function(_, bufnr)
   vim.keymap.set("n", "<space>sh", vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set("n", "<space>wa", vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set("n", "<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set(
-    "n", "<space>wl",
-    function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end,
-    bufopts
-  )
+  vim.keymap.set("n", "<space>wl", function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
   vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set(
-    "n", "<space>f", function() vim.lsp.buf.format { async = true } end, bufopts
-  )
+  vim.keymap.set("n", "<space>f", function()
+    vim.lsp.buf.format({ async = true })
+  end, bufopts)
 end
 
 -- Make runtime files discoverable to the server
@@ -50,12 +48,8 @@ local formatters = {
     formatStdin = true,
   },
   djlint = { formatCommand = "djlint --reformat -", formatStdin = true },
-  luaformatter = {
-    formatCommand = "lua-format" .. " --indent-width=2" .. " --tab-width=2"
-      .. " --continuation-indent-width=2" .. " --single-quote-to-double-quote"
-      .. " --spaces-inside-table-braces" .. " --no-break-after-operator"
-      .. " --break-after-functioncall-lp" .. " --break-before-functioncall-rp"
-      .. " --extra-sep-at-table-end" .. " -i",
+  stylua = {
+    formatCommand = "stylua --column-width=88 --indent-type=Spaces --indent-width=2 -",
     formatStdin = true,
   },
 }
@@ -65,7 +59,7 @@ for formatter, _ in pairs(formatters) do
 end
 local language_formatters = {
   python = { formatters.black, formatters.isort },
-  lua = { formatters.luaformatter },
+  lua = { formatters.stylua },
   javascript = { formatters.prettier },
   yaml = { formatters.prettier },
   json = { formatters.prettier },
@@ -104,26 +98,25 @@ local servers = {
 }
 
 require("mason").setup()
-require("mason-tool-installer").setup(
-  {
-    ensure_installed = ensure_installed_formatters,
-    auto_update = true,
-    run_on_start = true,
-  }
-)
-require("mason-lspconfig").setup(
-  { ensure_installed = servers, automatic_installation = true }
-)
+require("mason-tool-installer").setup({
+  ensure_installed = ensure_installed_formatters,
+  auto_update = true,
+  run_on_start = true,
+})
+require("mason-lspconfig").setup({
+  ensure_installed = servers,
+  automatic_installation = true,
+})
 
 -- init language servers
 for server, confs in pairs(servers) do
-  nvim_lsp[server].setup {
+  nvim_lsp[server].setup({
     on_attach = on_attach,
     capabilities = capabilities,
     filetypes = confs.filetypes,
     init_options = confs.init_options,
     settings = confs.settings,
-  }
+  })
 end
 
 -- Set completeopt to have a better completion experience

@@ -7,7 +7,7 @@ local fzf_opts = {
   -- the default case_mode is "smart_case"
 }
 
-telescope.setup {
+telescope.setup({
   defaults = {
     mappings = {
       i = {
@@ -27,7 +27,7 @@ telescope.setup {
     },
   },
   extensions = { fzf = fzf_opts },
-}
+})
 
 telescope.load_extension("fzf")
 
@@ -44,6 +44,6 @@ vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
 vim.keymap.set("n", "gtd", builtin.lsp_type_definitions, opts)
 vim.keymap.set("n", "gi", builtin.lsp_implementations, opts)
 vim.keymap.set("n", "gr", builtin.lsp_references, opts)
-vim.keymap.set(
-  "n", "<space>sd", function() builtin.diagnostics({ bufnr = 0 }) end, opts
-)
+vim.keymap.set("n", "<space>sd", function()
+  builtin.diagnostics({ bufnr = 0 })
+end, opts)

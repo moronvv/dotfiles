@@ -1,4 +1,4 @@
-require("lualine").setup {
+require("lualine").setup({
   options = {
     theme = "gruvbox-material",
     section_separators = "",
@@ -13,4 +13,4 @@ require("lualine").setup {
     lualine_y = { "filetype" },
     lualine_z = { "location" },
   },
-}
+})

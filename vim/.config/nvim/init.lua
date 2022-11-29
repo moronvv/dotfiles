@@ -50,9 +50,9 @@ vim.wo.signcolumn = "yes"
 
 -- Show line diagnostics automatically in hover window
 vim.diagnostic.config({ virtual_text = false })
-vim.cmd [[ 
+vim.cmd([[ 
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
-]]
+]])
 
 -- Autowrite and autoread files
 vim.o.autowrite = true
@@ -75,7 +75,7 @@ vim.o.lazyredraw = true
 -- Set colorscheme defaults (order is important here).
 vim.o.termguicolors = true
 vim.o.background = "dark"
-vim.cmd [[ colorscheme gruvbox-material ]]
+vim.cmd([[ colorscheme gruvbox-material ]])
 
 -- Hide ~ at the end of file
 vim.o.fillchars = "eob: "
@@ -87,11 +87,12 @@ vim.o.winblend = 10
 -- Highlight on yank
 vim.api.nvim_exec(
   [[
-  augroup highlight_yank
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
-  augroup END
-  ]], false
+    augroup highlight_yank
+      autocmd!
+      au TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=400}
+    augroup END
+  ]],
+  false
 )
 
 -- Y yank until the end of line  (note: this is now a default on master)
