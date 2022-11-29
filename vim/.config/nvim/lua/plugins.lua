@@ -44,20 +44,23 @@ require("packer").startup(function()
     },
   })
 
+  -- devicons
+  use("nvim-tree/nvim-web-devicons")
+
   -- themes
   use("sainnhe/gruvbox-material")
   use("bluz71/vim-nightfly-colors")
+  use("xiyaowong/nvim-transparent") -- transparency
 
   -- indent
-  -- use 'Yggdroot/indentLine'
   use("lukas-reineke/indent-blankline.nvim")
 
   -- statusline
-  use({
-    "nvim-lualine/lualine.nvim",
-    requires = { "kyazdani42/nvim-web-devicons", opt = true },
-  })
+  use("nvim-lualine/lualine.nvim")
   use("arkav/lualine-lsp-progress")
+
+  -- file explorer
+  use("prichrd/netrw.nvim") -- fancy netrw
 
   -- autosave
   use("907th/vim-auto-save")

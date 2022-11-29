@@ -15,3 +15,10 @@ vim.diagnostic.config({ virtual_text = false })
 vim.cmd([[ 
   autocmd CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})
 ]])
+
+-- Transparency
+require("transparent").setup({ enable = true })
+vim.cmd([[ 
+  hi link TelescopeNormal NormalFloat
+  hi link TelescopeBorder FloatBorder
+]])

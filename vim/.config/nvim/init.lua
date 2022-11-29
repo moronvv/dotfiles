@@ -4,6 +4,7 @@ require("plugins")
 
 require("plugs.lsp")
 require("plugs.xkbswitch")
+require("plugs.netrw")
 require("plugs.lualine")
 require("plugs.treesitter")
 require("plugs.cmp")

@@ -1,14 +1,15 @@
 local telescope = require("telescope")
 local fzf_opts = {
-  fuzzy = true, -- false will only do exact matching
-  override_generic_sorter = true, -- override the generic sorter
-  override_file_sorter = true, -- override the file sorter
-  case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-  -- the default case_mode is "smart_case"
+  fuzzy = true,
+  override_generic_sorter = true,
+  override_file_sorter = true,
+  case_mode = "smart_case",
 }
+local ignore_patterns = { ".git/", "node_modules/" }
 
 telescope.setup({
   defaults = {
+    file_ignore_patterns = ignore_patterns,
     mappings = {
       i = {
         ["<C-[>"] = require("telescope.actions").close,
@@ -35,7 +36,9 @@ telescope.load_extension("fzf")
 local builtin = require("telescope.builtin")
 local opts = { noremap = true, silent = true }
 
-vim.keymap.set("n", "<leader><space>", builtin.find_files, opts)
+vim.keymap.set("n", "<leader><space>", function()
+  builtin.find_files({ hidden = true })
+end, opts)
 vim.keymap.set("n", "<leader>sw", builtin.lsp_dynamic_workspace_symbols, opts)
 vim.keymap.set("n", "<leader>so", builtin.lsp_document_symbols, opts)
 vim.keymap.set("n", "<leader>sp", builtin.live_grep, opts)
