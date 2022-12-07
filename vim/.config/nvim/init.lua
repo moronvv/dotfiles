@@ -1,6 +1,6 @@
+require("plugins")
 require("keybindings")
 require("style")
-require("plugins")
 
 require("plugs.lsp")
 require("plugs.xkbswitch")

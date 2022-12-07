@@ -21,16 +21,16 @@ require("packer").startup(function()
   use("wbthomason/packer.nvim") -- Package manager
 
   -- miscs
-  use("tpope/vim-fugitive") -- Git commands in nvim
+  use("tpope/vim-fugitive") -- git commands in nvim
   use("tpope/vim-commentary") -- "gc" to comment visual regions/lines
-  use("tpope/vim-surround")
-  use("tpope/vim-unimpaired")
-  use("tpope/vim-repeat")
-  use("tpope/vim-abolish")
-  use("tpope/vim-vinegar")
-  use("tpope/vim-sleuth")
-  use("tpope/vim-obsession")
-  use("tpope/vim-eunuch")
+  use("tpope/vim-surround") -- surrounder for parentheses, brackets, quotes etc
+  use("tpope/vim-unimpaired") -- move operations with [ and ]
+  use("tpope/vim-repeat") -- helper for . repeat operations
+  use("tpope/vim-abolish") -- smart sabstitution
+  use("tpope/vim-vinegar") -- compfy settings for netrw
+  use("tpope/vim-sleuth") -- 'shiftwidth' and 'expandtab' automatical adjustment
+  use("tpope/vim-obsession") -- session saver
+  use("tpope/vim-eunuch") -- helper unix commands for files
   use("nelstrom/vim-visual-star-search") -- star serch on visual selection
   use("felipec/vim-sanegx") -- fix gx link opener
 
@@ -86,6 +86,7 @@ require("packer").startup(function()
   use("williamboman/mason-lspconfig.nvim")
   use("WhoIsSethDaniel/mason-tool-installer.nvim")
   use("neovim/nvim-lspconfig") -- collection of configurations for built-in LSP client
+  use("ray-x/lsp_signature.nvim") -- show function signature on insert
 
   -- highlight, edit, and navigate code using a fast incremental parsing library
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -105,5 +106,11 @@ require("packer").startup(function()
   use("hrsh7th/vim-vsnip")
   use("rafamadriz/friendly-snippets")
 
-  use({ "mcchrish/zenbones.nvim", requires = "rktjmp/lush.nvim" })
+  -- markdown
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  })
 end)

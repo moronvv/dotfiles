@@ -1,5 +1,25 @@
 require("nvim-treesitter.configs").setup({
-  ensure_installed = "all",
+  ensure_installed = {
+    "python",
+    "javascript",
+    "typescript",
+    "go",
+    "c",
+    "cpp",
+    "lua",
+    "html",
+    "css",
+    "bash",
+    "json",
+    "yaml",
+    "sql",
+    "gitignore",
+    "make",
+    "markdown",
+    "toml",
+    "vim",
+    "help",
+  },
   highlight = {
     enable = true, -- false will disable the whole extension
   },
