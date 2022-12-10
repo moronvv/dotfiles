@@ -14,6 +14,8 @@ require("nvim-treesitter.configs").setup({
     "yaml",
     "sql",
     "gitignore",
+    "gitcommit",
+    "diff",
     "make",
     "markdown",
     "toml",

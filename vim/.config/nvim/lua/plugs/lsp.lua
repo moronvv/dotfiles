@@ -104,7 +104,10 @@ local servers = {
       Lua = {
         format = { enable = false },
         runtime = { version = "LuaJIT", path = runtime_path },
-        diagnostics = { globals = { "vim", "use" } },
+        diagnostics = {
+          globals = { "vim", "use" },
+          disable = { "lowercase-global" },
+        },
         telemetry = { enable = false },
       },
     },

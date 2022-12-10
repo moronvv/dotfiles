@@ -1,6 +1,6 @@
 require("lualine").setup({
   options = {
-    theme = LualineColorscheme,
+    theme = vim.g.statusline_colorscheme,
     section_separators = "",
     component_separators = "|",
     icons_enabled = true,
