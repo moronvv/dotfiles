@@ -3,7 +3,6 @@ local nvim_lsp = require("lspconfig")
 -- Mappings.
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
-vim.keymap.set("n", "<space>glr", ":LspRestart<CR>", opts)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
 vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
@@ -140,14 +139,6 @@ require("lsp_signature").setup({
   bind = true,
   hint_enable = false,
 })
-
--- highlight line number instead of having icons in sign column
-vim.cmd([[
-  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=LspDiagnosticsSignError
-  sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=LspDiagnosticsSignWarning
-  sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=LspDiagnosticsSignInfo
-  sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=LspDiagnosticsSignHint
-]])
 
 -- Set completeopt to have a better completion experience
 vim.opt.completeopt = { "menuone", "noselect", "preview" }

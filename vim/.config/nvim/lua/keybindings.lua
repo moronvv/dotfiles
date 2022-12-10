@@ -26,3 +26,9 @@ vim.api.nvim_exec(
   ]],
   false
 )
+
+-- pdb breakpoint
+vim.api.nvim_exec(
+  [[autocmd FileType python nnoremap <buffer> <leader>b Obreakpoint()<Esc>]],
+  false
+)

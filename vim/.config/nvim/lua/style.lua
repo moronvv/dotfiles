@@ -1,7 +1,8 @@
 -- set colorscheme defaults (order is important here).
 vim.opt.termguicolors = true
 vim.opt.background = "dark"
-vim.cmd([[ colorscheme gruvbox-material ]])
+vim.cmd.colorscheme("catppuccin-macchiato")
+LualineColorscheme = "catppuccin"
 
 -- hide ~ at the end of file
 vim.opt.fillchars = "eob: "

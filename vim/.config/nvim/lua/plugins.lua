@@ -49,7 +49,7 @@ require("packer").startup(function()
 
   -- themes
   use("sainnhe/gruvbox-material")
-  use("bluz71/vim-nightfly-colors")
+  use({ "catppuccin/nvim", as = "catppuccin" })
   use("xiyaowong/nvim-transparent") -- transparency
 
   -- indent
