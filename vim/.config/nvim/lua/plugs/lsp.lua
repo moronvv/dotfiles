@@ -38,7 +38,6 @@ local on_attach = function(_, bufnr)
       vim.diagnostic.open_float(nil, {
         focusable = false,
         close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
-        border = "rounded",
         source = "always",
         prefix = " ",
       })
@@ -139,6 +138,3 @@ require("lsp_signature").setup({
   bind = true,
   hint_enable = false,
 })
-
--- Set completeopt to have a better completion experience
-vim.opt.completeopt = { "menuone", "noselect", "preview" }

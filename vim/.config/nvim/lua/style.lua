@@ -11,7 +11,3 @@ vim.opt.fillchars = "eob: "
 vim.opt.pumblend = 10
 vim.opt.winblend = 10
 require("transparent").setup({ enable = true })
-vim.cmd([[ 
-  hi link TelescopeNormal NormalFloat
-  hi link TelescopeBorder FloatBorder
-]])

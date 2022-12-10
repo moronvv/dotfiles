@@ -44,8 +44,9 @@ require("packer").startup(function()
     },
   })
 
-  -- devicons
+  -- custom icons
   use("nvim-tree/nvim-web-devicons")
+  use("onsails/lspkind.nvim")
 
   -- themes
   use("sainnhe/gruvbox-material")
@@ -99,6 +100,8 @@ require("packer").startup(function()
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-cmdline")
+  use("andersevenrud/cmp-tmux")
+  use("lukas-reineke/cmp-under-comparator") -- helper for sorting kinds
   use("hrsh7th/nvim-cmp")
 
   -- snippets
