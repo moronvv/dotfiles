@@ -10,21 +10,21 @@ compare.under = require("cmp-under-comparator").under
 -- https://github.com/onsails/lspkind.nvim/blob/master/lua/lspkind/init.lua
 local kind_order = {
   "EnumMember",
+  "Property",
+  "Keyword",
+  "Variable",
   "Snippet",
   "Text",
   "Method",
   "Function",
   "Constructor",
   "Field",
-  "Variable",
   "Class",
   "Interface",
   "Module",
-  "Property",
   "Unit",
   "Value",
   "Enum",
-  "Keyword",
   "Color",
   "File",
   "Reference",
@@ -151,4 +151,4 @@ cmp.setup.cmdline(":", {
 })
 
 -- Set completeopt to have a better completion experience
-vim.opt.completeopt = { "menu", "menuone", "noselect", "preview" }
+vim.opt.completeopt = { "menu", "noselect", "preview" }

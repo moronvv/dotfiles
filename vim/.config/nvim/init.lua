@@ -13,13 +13,11 @@ require("plugs.gitsigns")
 require("plugs.fugitive")
 require("plugs.autosave")
 require("plugs.indent_blankline")
+require("plugs.todo_comments")
 
 -- relative numbers
 vim.opt.number = true
 vim.opt.relativenumber = true
-
--- enable mouse mode
-vim.opt.mouse = "a"
 
 -- enable break indent
 vim.opt.breakindent = true

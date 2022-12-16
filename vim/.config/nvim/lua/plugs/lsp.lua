@@ -43,6 +43,15 @@ local on_attach = function(_, bufnr)
       })
     end,
   })
+
+  -- init lsp signature
+  require("lsp_signature").on_attach({
+    bind = true,
+    hint_enable = false,
+    handler_opts = {
+      border = "none",
+    },
+  }, bufnr)
 end
 
 -- Make runtime files discoverable to the server
@@ -136,8 +145,10 @@ for server, confs in pairs(servers) do
   })
 end
 
--- init lsp signature
-require("lsp_signature").setup({
-  bind = true,
-  hint_enable = false,
-})
+-- highlight line number instead of having icons in sign column
+vim.cmd([[
+  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticSignError
+  sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticSignWarn
+  sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticSignInfo
+  sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticSignHint
+]])

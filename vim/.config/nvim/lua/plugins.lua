@@ -20,7 +20,7 @@ vim.api.nvim_exec(
 require("packer").startup(function()
   use("wbthomason/packer.nvim") -- Package manager
 
-  -- miscs
+  -- MISCS
   use("tpope/vim-fugitive") -- git commands in nvim
   use("tpope/vim-commentary") -- "gc" to comment visual regions/lines
   use("tpope/vim-surround") -- surrounder for parentheses, brackets, quotes etc
@@ -34,22 +34,13 @@ require("packer").startup(function()
   use("nelstrom/vim-visual-star-search") -- star serch on visual selection
   use("felipec/vim-sanegx") -- fix gx link opener
 
-  -- UI to select things (files, grep results, open buffers...)
-  use({
-    "nvim-telescope/telescope.nvim",
-    requires = {
-      "nvim-lua/plenary.nvim",
-      "BurntSushi/ripgrep",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    },
-  })
+  -- UI
 
   -- custom icons
   use("nvim-tree/nvim-web-devicons")
   use("onsails/lspkind.nvim")
 
   -- themes
-  use("sainnhe/gruvbox-material")
   use({ "catppuccin/nvim", as = "catppuccin" })
   use("xiyaowong/nvim-transparent") -- transparency
 
@@ -62,6 +53,23 @@ require("packer").startup(function()
 
   -- file explorer
   use("prichrd/netrw.nvim") -- fancy netrw
+
+  use({
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+  })
+
+  -- WORKFLOW
+
+  -- fuzzy finder
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "BurntSushi/ripgrep",
+      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+    },
+  })
 
   -- autosave
   use("907th/vim-auto-save")
