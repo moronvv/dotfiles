@@ -71,8 +71,9 @@ require("packer").startup(function()
     },
   })
 
-  -- autosave
-  use("907th/vim-auto-save")
+  -- auto-save
+  -- TODO: move to main branch after empty msg fix
+  use({ "Pocco81/auto-save.nvim", branch = "dev" })
 
   -- tmux
   use("christoomey/vim-tmux-navigator")

@@ -1,6 +1,7 @@
 require("plugins")
 require("keybindings")
 require("style")
+require("spellcheck")
 
 require("plugs.lsp")
 require("plugs.xkbswitch")
@@ -11,7 +12,7 @@ require("plugs.cmp")
 require("plugs.telescope")
 require("plugs.gitsigns")
 require("plugs.fugitive")
-require("plugs.autosave")
+require("plugs.auto_save")
 require("plugs.indent_blankline")
 require("plugs.todo_comments")
 
