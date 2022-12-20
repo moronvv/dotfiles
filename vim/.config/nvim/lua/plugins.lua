@@ -33,6 +33,7 @@ require("packer").startup(function()
   use("tpope/vim-eunuch") -- helper unix commands for files
   use("nelstrom/vim-visual-star-search") -- star serch on visual selection
   use("felipec/vim-sanegx") -- fix gx link opener
+  use("arnamak/stay-centered.nvim") -- keep view in the center of screen
 
   -- UI
 

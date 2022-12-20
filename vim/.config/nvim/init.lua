@@ -12,9 +12,10 @@ require("plugs.cmp")
 require("plugs.telescope")
 require("plugs.gitsigns")
 require("plugs.fugitive")
-require("plugs.auto_save")
-require("plugs.indent_blankline")
-require("plugs.todo_comments")
+require("plugs.auto-save")
+require("plugs.indent-blankline")
+require("plugs.todo-comments")
+require("plugs.stay-centered")
 
 -- relative numbers
 vim.opt.number = true
