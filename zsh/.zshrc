@@ -183,5 +183,3 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 [ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-
-export PATH="$HOME/.poetry/bin:$PATH"
