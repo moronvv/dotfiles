@@ -48,3 +48,6 @@ vim.opt.splitbelow = true
 
 -- lazy redraw when macro working
 vim.opt.lazyredraw = true
+
+-- hide mode below statusline
+vim.opt.showmode = false

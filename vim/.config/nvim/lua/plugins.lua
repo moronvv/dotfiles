@@ -9,11 +9,11 @@ end
 
 vim.api.nvim_exec(
   [[
-      augroup Packer
-        autocmd!
-        autocmd BufWritePost init.lua PackerCompile
-      augroup end
-    ]],
+    augroup Packer
+      autocmd!
+      autocmd BufWritePost init.lua PackerCompile
+    augroup end
+  ]],
   false
 )
 
@@ -43,6 +43,7 @@ require("packer").startup(function()
 
   -- themes
   use({ "catppuccin/nvim", as = "catppuccin" })
+  use({ "rose-pine/neovim", as = "rose-pine" })
   use("xiyaowong/nvim-transparent") -- transparency
 
   -- indent
@@ -79,7 +80,7 @@ require("packer").startup(function()
   -- tmux
   use("christoomey/vim-tmux-navigator")
 
-  -- lang switch
+  -- lang switcher
   use("lyokha/vim-xkbswitch")
 
   -- disables highlighting after search
