@@ -102,6 +102,9 @@ local servers = {
   },
   pyright = {},
   tsserver = {},
+  hls = {
+    filetypes = { "haskell", "lhaskell", "cabal" },
+  },
   yamlls = { settings = { telemetry = { enabled = false } } },
   jsonls = { init_options = { provideFormatter = false } },
   html = {},

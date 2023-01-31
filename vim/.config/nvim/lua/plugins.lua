@@ -32,7 +32,6 @@ require("packer").startup(function()
   use("tpope/vim-obsession") -- session saver
   use("tpope/vim-eunuch") -- helper unix commands for files
   use("nelstrom/vim-visual-star-search") -- star serch on visual selection
-  use("felipec/vim-sanegx") -- fix gx link opener
   use("arnamak/stay-centered.nvim") -- keep view in the center of screen
 
   -- UI
@@ -54,7 +53,8 @@ require("packer").startup(function()
   use("arkav/lualine-lsp-progress")
 
   -- file explorer
-  use("prichrd/netrw.nvim") -- fancy netrw
+  -- use("prichrd/netrw.nvim") -- fancy netrw
+  use("stevearc/oil.nvim")
 
   use({
     "folke/todo-comments.nvim",

@@ -1,6 +1,7 @@
 vim.opt.diffopt:append("vertical")
 
-vim.keymap.set("n", "<space>gs", ":Git<CR>", { noremap = true, silent = true })
+-- save all buffers and open fugitive git status
+vim.keymap.set("n", "<space>gs", ":wa | :Git<CR>", { noremap = true, silent = true })
 
 -- no wrap for git commit long messages
 vim.api.nvim_exec(

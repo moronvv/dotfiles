@@ -173,6 +173,9 @@ eval "$(pyenv virtualenv-init -)"
 export DIRENV_LOG_FORMAT=
 eval "$(direnv hook zsh)"
 
+# haskell
+source ~/.ghcup/env
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

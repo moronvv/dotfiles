@@ -5,7 +5,7 @@ require("spellcheck")
 
 require("plugs.lsp")
 require("plugs.xkbswitch")
-require("plugs.netrw")
+require("plugs.oil")
 require("plugs.lualine")
 require("plugs.treesitter")
 require("plugs.cmp")

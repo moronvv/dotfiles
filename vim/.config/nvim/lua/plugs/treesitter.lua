@@ -3,6 +3,7 @@ require("nvim-treesitter.configs").setup({
     "python",
     "javascript",
     "typescript",
+    "haskell",
     "go",
     "c",
     "cpp",
