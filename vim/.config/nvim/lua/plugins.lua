@@ -1,130 +1,143 @@
--- Install packer.
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute(
-    "!git clone https://github.com/wbthomason/packer.nvim " .. install_path
-  )
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.api.nvim_exec(
-  [[
-    augroup Packer
-      autocmd!
-      autocmd BufWritePost init.lua PackerCompile
-    augroup end
-  ]],
-  false
-)
-
-require("packer").startup(function()
-  use("wbthomason/packer.nvim") -- Package manager
-
+require("lazy").setup({
   -- MISCS
-  use("tpope/vim-fugitive") -- git commands in nvim
-  use("tpope/vim-commentary") -- "gc" to comment visual regions/lines
-  use("tpope/vim-surround") -- surrounder for parentheses, brackets, quotes etc
-  use("tpope/vim-unimpaired") -- move operations with [ and ]
-  use("tpope/vim-repeat") -- helper for . repeat operations
-  use("tpope/vim-abolish") -- smart sabstitution
-  use("tpope/vim-vinegar") -- compfy settings for netrw
-  use("tpope/vim-sleuth") -- 'shiftwidth' and 'expandtab' automatical adjustment
-  use("tpope/vim-obsession") -- session saver
-  use("tpope/vim-eunuch") -- helper unix commands for files
-  use("nelstrom/vim-visual-star-search") -- star serch on visual selection
-  use("arnamak/stay-centered.nvim") -- keep view in the center of screen
+  "tpope/vim-commentary", -- "gc" to comment visual regions/lines
+  "tpope/vim-surround", -- surrounder for parentheses, brackets, quotes etc
+  "tpope/vim-unimpaired", -- move operations with [ and ]
+  "tpope/vim-repeat", -- helper for . repeat operations
+  "tpope/vim-abolish", -- smart sabstitution
+  "tpope/vim-vinegar", -- compfy settings for netrw
+  "tpope/vim-sleuth", -- 'shiftwidth' and 'expandtab' automatical adjustment
+  "tpope/vim-obsession", -- session saver
+  "tpope/vim-eunuch", -- helper unix commands for files
+  "nelstrom/vim-visual-star-search", -- star serch on visual selection
+  "arnamak/stay-centered.nvim", -- keep view in the center of screen
+  "romainl/vim-cool", -- disables highlighting after search
+  "christoomey/vim-tmux-navigator", -- tmux
+  "lyokha/vim-xkbswitch", -- lang switcher
 
   -- UI
-
-  -- custom icons
-  use("nvim-tree/nvim-web-devicons")
-  use("onsails/lspkind.nvim")
-
   -- themes
-  use({ "catppuccin/nvim", as = "catppuccin" })
-  use({ "rose-pine/neovim", as = "rose-pine" })
-  use("xiyaowong/nvim-transparent") -- transparency
+  { "catppuccin/nvim", name = "catppuccin" },
+  { "rose-pine/neovim", name = "rose-pine" },
+  "xiyaowong/nvim-transparent", -- transparency
 
   -- indent
-  use("lukas-reineke/indent-blankline.nvim")
+  "lukas-reineke/indent-blankline.nvim",
 
   -- statusline
-  use("nvim-lualine/lualine.nvim")
-  use("arkav/lualine-lsp-progress")
+  {
+    "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "arkav/lualine-lsp-progress",
+      "nvim-tree/nvim-web-devicons", -- icons
+    },
+  },
 
   -- file explorer
-  -- use("prichrd/netrw.nvim") -- fancy netrw
-  use("stevearc/oil.nvim")
+  -- "prichrd/netrw.nvim", -- fancy netrw
+  {
+    "stevearc/oil.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons", -- icons
+    },
+  },
 
-  use({
+  {
     "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-  })
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 
   -- WORKFLOW
 
   -- fuzzy finder
-  use({
+  {
     "nvim-telescope/telescope.nvim",
-    requires = {
+    dependencies = {
       "nvim-lua/plenary.nvim",
       "BurntSushi/ripgrep",
-      { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+      "nvim-tree/nvim-web-devicons", -- icons
     },
-  })
+  },
 
   -- auto-save
   -- TODO: move to main branch after empty msg fix
-  use({ "Pocco81/auto-save.nvim", branch = "dev" })
-
-  -- tmux
-  use("christoomey/vim-tmux-navigator")
-
-  -- lang switcher
-  use("lyokha/vim-xkbswitch")
-
-  -- disables highlighting after search
-  use("romainl/vim-cool")
+  { "Pocco81/auto-save.nvim", branch = "dev" },
 
   -- git signs
-  use({ "lewis6991/gitsigns.nvim", requires = { "nvim-lua/plenary.nvim" } })
+  "tpope/vim-fugitive", -- git commands in nvim
+  "lewis6991/gitsigns.nvim",
 
   -- autoclose pairs
-  -- use 'windwp/nvim-autopairs'
-  use("rstacruz/vim-closer")
+  -- "windwp/nvim-autopairs"
+  "rstacruz/vim-closer",
 
   -- LSP
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
-  use("WhoIsSethDaniel/mason-tool-installer.nvim")
-  use("neovim/nvim-lspconfig") -- collection of configurations for built-in LSP client
-  use("ray-x/lsp_signature.nvim") -- show function signature on insert
+  {
+    -- collection of configurations for built-in LSP client
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- UI and autoinstall for LSPs
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+
+      -- show function signature on insert
+      "ray-x/lsp_signature.nvim",
+    },
+  },
 
   -- highlight, edit, and navigate code using a fast incremental parsing library
-  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-  use("nvim-treesitter/nvim-treesitter-textobjects")
-  use("nvim-treesitter/nvim-treesitter-context")
-  use("RRethy/nvim-treesitter-endwise")
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "nvim-treesitter/nvim-treesitter-context",
+      "RRethy/nvim-treesitter-endwise",
+    },
+  },
 
   -- autocompletion
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-cmdline")
-  use("andersevenrud/cmp-tmux")
-  use("lukas-reineke/cmp-under-comparator") -- helper for sorting kinds
-  use("hrsh7th/nvim-cmp")
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      -- additional completion options
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
 
-  -- snippets
-  use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/vim-vsnip")
-  use("rafamadriz/friendly-snippets")
+      -- snippets
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
+      "rafamadriz/friendly-snippets",
+
+      -- misc
+      "lukas-reineke/cmp-under-comparator", -- helper for sorting kinds
+      "nvim-tree/nvim-web-devicons", -- icons
+      "onsails/lspkind.nvim", -- kinds for autocompletion
+    },
+  },
 
   -- markdown
-  use({
+  {
     "iamcco/markdown-preview.nvim",
-    run = function()
+    build = function()
       vim.fn["mkdp#util#install"]()
     end,
-  })
-end)
+  },
+})
