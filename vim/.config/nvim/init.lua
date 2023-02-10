@@ -1,5 +1,5 @@
-require("plugins")
 require("keybindings")
+require("plugins")
 require("style")
 require("spellcheck")
 
