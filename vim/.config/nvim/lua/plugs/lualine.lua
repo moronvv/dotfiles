@@ -9,7 +9,7 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", "diagnostics" },
     lualine_c = { "filename" },
-    lualine_x = { "lsp_progress" },
+    lualine_x = {},
     lualine_y = { "filetype" },
     lualine_z = { "location" },
   },

@@ -12,8 +12,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- MISCS
-  "tpope/vim-commentary", -- "gc" to comment visual regions/lines
+  -- MISC
+  "tpope/vim-fugitive", -- git commands in nvim
+  -- "tpope/vim-commentary", -- "gc" to comment visual regions/lines
   "tpope/vim-surround", -- surrounder for parentheses, brackets, quotes etc
   "tpope/vim-unimpaired", -- move operations with [ and ]
   "tpope/vim-repeat", -- helper for . repeat operations
@@ -28,23 +29,36 @@ require("lazy").setup({
   "christoomey/vim-tmux-navigator", -- tmux
   "lyokha/vim-xkbswitch", -- lang switcher
 
+  -- commands for fast code commenting
+  { "numToStr/Comment.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
+
+  -- auto-save
+  -- TODO: move to main branch after empty msg fix
+  { "Pocco81/auto-save.nvim", branch = "dev" },
+
+  -- autoclose pairs
+  -- "windwp/nvim-autopairs"
+  "rstacruz/vim-closer",
+
   -- UI
   -- themes
   { "catppuccin/nvim", name = "catppuccin" },
   { "rose-pine/neovim", name = "rose-pine" },
   "xiyaowong/nvim-transparent", -- transparency
 
-  -- indent
-  "lukas-reineke/indent-blankline.nvim",
-
   -- statusline
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-      "arkav/lualine-lsp-progress",
       "nvim-tree/nvim-web-devicons", -- icons
     },
   },
+
+  -- git signs
+  "lewis6991/gitsigns.nvim", -- git signs
+
+  -- indent
+  "lukas-reineke/indent-blankline.nvim",
 
   -- file explorer
   -- "prichrd/netrw.nvim", -- fancy netrw
@@ -55,13 +69,20 @@ require("lazy").setup({
     },
   },
 
+  -- todo highlight and search
   {
     "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = {
+      "BurntSushi/ripgrep",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
   },
 
-  -- WORKFLOW
+  -- lsp startup progress
+  { "j-hui/fidget.nvim", dependencies = { "neovim/nvim-lspconfig" } },
 
+  -- WORKFLOW
   -- fuzzy finder
   {
     "nvim-telescope/telescope.nvim",
@@ -72,18 +93,6 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons", -- icons
     },
   },
-
-  -- auto-save
-  -- TODO: move to main branch after empty msg fix
-  { "Pocco81/auto-save.nvim", branch = "dev" },
-
-  -- git signs
-  "tpope/vim-fugitive", -- git commands in nvim
-  "lewis6991/gitsigns.nvim",
-
-  -- autoclose pairs
-  -- "windwp/nvim-autopairs"
-  "rstacruz/vim-closer",
 
   -- LSP
   {
@@ -127,9 +136,9 @@ require("lazy").setup({
       "rafamadriz/friendly-snippets",
 
       -- misc
+      "onsails/lspkind.nvim", -- kinds for autocompletion
       "lukas-reineke/cmp-under-comparator", -- helper for sorting kinds
       "nvim-tree/nvim-web-devicons", -- icons
-      "onsails/lspkind.nvim", -- kinds for autocompletion
     },
   },
 
