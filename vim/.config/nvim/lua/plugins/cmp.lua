@@ -15,6 +15,7 @@ return {
     -- misc
     "onsails/lspkind.nvim", -- kinds for autocompletion
     "lukas-reineke/cmp-under-comparator", -- helper for sorting kinds
+    "windwp/nvim-autopairs", -- brackets autocloser
     "nvim-tree/nvim-web-devicons", -- icons
   },
   config = function()
@@ -22,6 +23,10 @@ return {
     local compare = require("cmp.config.compare")
     local lspkind = require("lspkind")
     local kinds = require("cmp.types").lsp.CompletionItemKind
+    local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
+    -- init brackets autocloser
+    cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
     -- move magic methods to bottom
     compare.under = require("cmp-under-comparator").under

@@ -10,6 +10,4 @@ return {
   "nelstrom/vim-visual-star-search", -- star serch on visual selection
   "romainl/vim-cool", -- disables highlighting after search
   "christoomey/vim-tmux-navigator", -- tmux
-  -- "windwp/nvim-autopairs"
-  "rstacruz/vim-closer", -- autoclose pairs
 }
