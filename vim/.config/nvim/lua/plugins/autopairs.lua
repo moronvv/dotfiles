@@ -1,7 +1,7 @@
 return {
   "windwp/nvim-autopairs",
   config = function()
-    require("nvim-autopairs").setup({})
+    require("nvim-autopairs").setup()
 
     -- make autopairs work in vim-closer style
     -- https://github.com/windwp/nvim-autopairs/wiki/Custom-rules#expand-multiple-pairs-on-enter-key
