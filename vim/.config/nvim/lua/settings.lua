@@ -32,3 +32,6 @@ vim.opt.lazyredraw = true
 
 -- hide mode below statusline
 vim.opt.showmode = false
+
+-- hide ~ at the end of file
+vim.opt.fillchars = "eob: "
