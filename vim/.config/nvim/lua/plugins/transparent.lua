@@ -1,7 +1,7 @@
 return {
-  "xiyaowong/nvim-transparent", -- transparency
+  "xiyaowong/transparent.nvim", -- transparency
   config = function()
-    require("transparent").setup({ enable = true })
+    require("transparent").setup()
 
     vim.opt.pumblend = 10
     vim.opt.winblend = 10

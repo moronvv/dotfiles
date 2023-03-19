@@ -51,7 +51,9 @@ return {
     vim.keymap.set("n", "<leader>sw", builtin.lsp_dynamic_workspace_symbols, opts)
     vim.keymap.set("n", "<leader>so", builtin.lsp_document_symbols, opts)
     vim.keymap.set("n", "<leader>sp", builtin.live_grep, opts)
-    vim.keymap.set("n", "<leader>fb", builtin.buffers, opts)
+    vim.keymap.set("n", "<leader>fb", function()
+      builtin.buffers({ sort_mru = true })
+    end, opts)
 
     vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
     vim.keymap.set("n", "gtd", builtin.lsp_type_definitions, opts)
