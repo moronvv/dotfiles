@@ -14,7 +14,7 @@ return {
       override_file_sorter = true,
       case_mode = "smart_case",
     }
-    local ignore_patterns = { ".git/", "node_modules/" }
+    local ignore_patterns = { ".git/", "node_modules/", "vendor/" }
 
     telescope.setup({
       defaults = {

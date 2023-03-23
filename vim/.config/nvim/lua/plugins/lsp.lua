@@ -114,6 +114,7 @@ return {
         settings = { rootMarkers = { ".git/" }, languages = language_formatters },
       },
       pyright = {},
+      gopls = {},
       tsserver = {},
       hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },

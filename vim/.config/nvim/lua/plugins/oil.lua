@@ -4,6 +4,10 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons", -- icons
   },
+  init = function()
+    vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
+  end,
+  keys = "-",
   config = function()
     require("oil").setup({
       view_options = {
@@ -19,8 +23,6 @@ return {
       },
       use_default_keymaps = false,
     })
-
-    vim.keymap.set("n", "-", require("oil").open, { desc = "Open parent directory" })
 
     -- disable netrw
     vim.g.loaded_netrw = 1
