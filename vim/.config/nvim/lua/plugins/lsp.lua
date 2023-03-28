@@ -79,6 +79,10 @@ return {
     local formatters = {
       black = { formatCommand = "black --quiet -", formatStdin = true },
       isort = { formatCommand = "isort --profile black -", formatStdin = true },
+      sql_formatter = {
+        formatCommand = "sql-formatter --language postgresql",
+        formatStdin = true,
+      },
       prettier = {
         formatCommand = "prettier --stdin-filepath ${INPUT}",
         formatStdin = true,
@@ -91,12 +95,14 @@ return {
     }
     local ensure_installed_formatters = {}
     for formatter, _ in pairs(formatters) do
+      formatter = formatter:gsub("_", "-")
       table.insert(ensure_installed_formatters, formatter)
     end
     local language_formatters = {
       python = { formatters.black, formatters.isort },
       lua = { formatters.stylua },
       javascript = { formatters.prettier },
+      sql = { formatters.sql_formatter },
       yaml = { formatters.prettier },
       json = { formatters.prettier },
       html = { formatters.prettier },
@@ -119,6 +125,7 @@ return {
       hls = {
         filetypes = { "haskell", "lhaskell", "cabal" },
       },
+      sqlls = {},
       yamlls = { settings = { telemetry = { enabled = false } } },
       jsonls = { init_options = { provideFormatter = false } },
       html = {},
