@@ -147,33 +147,33 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 # Environs
 export VISUAL="nvim"
 
+# brew
+export PATH="/usr/local/sbin:$PATH"
+
+# direnv
+export DIRENV_LOG_FORMAT=
+eval "$(direnv hook zsh)"
+
+# python
+# ipdb
+export PYTHONBREAKPOINT=ipdb.set_trace
+# pyenv
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 # Pyenv config
 export PYENV_ROOT="$HOME/.pyenv"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
-# brew
-export PATH="/usr/local/sbin:$PATH"
-
-# haskell config
-export PATH="$HOME/.local/bin:$PATH"
-#eval "$(stack --bash-completion-script stack)"
-
-# poetry
-
-# ipdb
-export PYTHONBREAKPOINT=ipdb.set_trace
-
-# pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# direnv
-export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh)"
+# go
+export GOPATH=$HOME/go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 # haskell
+export PATH="$HOME/.local/bin:$PATH"
 source ~/.ghcup/env
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

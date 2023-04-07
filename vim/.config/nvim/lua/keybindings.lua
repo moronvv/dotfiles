@@ -30,8 +30,14 @@ vim.api.nvim_exec(
   false
 )
 
--- pdb breakpoint
+-- python breakpoint
 vim.api.nvim_exec(
   [[autocmd FileType python nnoremap <buffer> <leader>b Obreakpoint()<Esc>]],
+  false
+)
+
+-- go breakpoint
+vim.api.nvim_exec(
+  [[autocmd FileType go nnoremap <buffer> <leader>b Oruntime.Breakpoint()<Esc>]],
   false
 )

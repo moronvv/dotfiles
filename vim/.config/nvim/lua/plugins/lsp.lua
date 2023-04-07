@@ -79,6 +79,7 @@ return {
     local formatters = {
       black = { formatCommand = "black --quiet -", formatStdin = true },
       isort = { formatCommand = "isort --profile black -", formatStdin = true },
+      goimports = { formatCommand = "goimports", formatStdin = true },
       sql_formatter = {
         formatCommand = "sql-formatter --language postgresql",
         formatStdin = true,
@@ -100,6 +101,7 @@ return {
     end
     local language_formatters = {
       python = { formatters.black, formatters.isort },
+      go = { formatters.goimports },
       lua = { formatters.stylua },
       javascript = { formatters.prettier },
       sql = { formatters.sql_formatter },

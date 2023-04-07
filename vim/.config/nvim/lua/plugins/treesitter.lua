@@ -33,7 +33,7 @@ return {
         "markdown",
         "toml",
         "vim",
-        "help",
+        "vimdoc",
       },
       highlight = {
         enable = true, -- false will disable the whole extension
