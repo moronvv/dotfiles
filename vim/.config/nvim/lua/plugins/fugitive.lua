@@ -12,6 +12,9 @@ return {
       { noremap = true, silent = true }
     )
 
+    vim.keymap.set("n", "<space>gh", "<cmd>diffget //2<CR>")
+    vim.keymap.set("n", "<space>gl", "<cmd>diffget //3<CR>")
+
     -- no wrap for git commit long messages
     vim.api.nvim_exec(
       [[

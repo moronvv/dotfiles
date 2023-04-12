@@ -16,8 +16,12 @@ return {
     -- Mappings.
     -- See `:help vim.diagnostic.*` for documentation on any of the below functions
     local opts = { noremap = true, silent = true }
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "[d", function()
+      vim.diagnostic.goto_prev({ severity = { min = vim.diagnostic.severity.WARN } })
+    end, opts)
+    vim.keymap.set("n", "]d", function()
+      vim.diagnostic.goto_next({ severity = { min = vim.diagnostic.severity.WARN } })
+    end, opts)
     vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
 
     -- Use an on_attach function to only map the following keys
@@ -79,7 +83,9 @@ return {
     local formatters = {
       black = { formatCommand = "black --quiet -", formatStdin = true },
       isort = { formatCommand = "isort --profile black -", formatStdin = true },
-      goimports = { formatCommand = "goimports", formatStdin = true },
+      goimports_reviser = {
+        formatCommand = "goimports-reviser -rm-unused -set-alias -format --output stdout",
+      },
       sql_formatter = {
         formatCommand = "sql-formatter --language postgresql",
         formatStdin = true,
@@ -101,7 +107,7 @@ return {
     end
     local language_formatters = {
       python = { formatters.black, formatters.isort },
-      go = { formatters.goimports },
+      go = { formatters.goimports_reviser },
       lua = { formatters.stylua },
       javascript = { formatters.prettier },
       sql = { formatters.sql_formatter },
