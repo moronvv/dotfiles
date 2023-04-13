@@ -83,6 +83,10 @@ return {
     local formatters = {
       black = { formatCommand = "black --quiet -", formatStdin = true },
       isort = { formatCommand = "isort --profile black -", formatStdin = true },
+      autoflake = {
+        formatCommand = "autoflake --remove-all-unused-imports --ignore-init-module-imports -",
+        formatStdin = true,
+      },
       goimports_reviser = {
         formatCommand = "goimports-reviser -rm-unused -set-alias -format --output stdout",
       },
@@ -106,7 +110,7 @@ return {
       table.insert(ensure_installed_formatters, formatter)
     end
     local language_formatters = {
-      python = { formatters.black, formatters.isort },
+      python = { formatters.black, formatters.isort, formatters.autoflake },
       go = { formatters.goimports_reviser },
       lua = { formatters.stylua },
       javascript = { formatters.prettier },
