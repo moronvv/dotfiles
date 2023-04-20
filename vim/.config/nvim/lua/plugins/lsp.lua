@@ -138,7 +138,12 @@ return {
         filetypes = { "haskell", "lhaskell", "cabal" },
       },
       sqlls = {},
-      yamlls = { settings = { telemetry = { enabled = false } } },
+      yamlls = {
+        settings = {
+          yaml = { keyOrdering = false },
+          redhat = { telemetry = { enabled = false } },
+        },
+      },
       jsonls = { init_options = { provideFormatter = false } },
       html = {},
       marksman = {},

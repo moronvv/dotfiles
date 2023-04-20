@@ -94,6 +94,7 @@ plugins=(
   docker-compose
   zsh-autosuggestions
   zsh-syntax-highlighting
+  zsh-history-substring-search
   zsh-completions
   z
   autoswitch_virtualenv
@@ -104,8 +105,9 @@ source $ZSH/oh-my-zsh.sh
 export HISTSIZE=10000
 export SAVEHIST=10000
 # setopt inc_append_history
-setopt hist_ignore_dups
-setopt hist_ignore_space
+setopt HIST_IGNORE_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
 
 # User configuration
 
@@ -133,8 +135,14 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# keys remap
-bindkey \^U backward-kill-line
+# autocompletion
+autoload -U compinit; compinit
+
+# remove whole line
+bindkey '^U' backward-kill-line
+# partial history search
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
 
 # Aliases
 alias vim="nvim"
@@ -146,6 +154,9 @@ alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 # Environs
 export VISUAL="nvim"
+
+# zsh-history-substring-search
+export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
 # brew
 export PATH="/usr/local/sbin:$PATH"
