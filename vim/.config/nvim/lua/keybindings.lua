@@ -4,11 +4,8 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Remap for dealing with word wrap and keep screen centered.
-vim.keymap.set("n", "k", "v:count == 0 ? 'gkzz' : 'kzz'", { expr = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gjzz' : 'jzz'", { expr = true })
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<S-g>", "<S-g>zz")
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
 
 -- Remap for easy windows hopping
 vim.keymap.set("n", "<C-h>", "<C-w>h")
