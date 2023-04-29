@@ -1,5 +1,4 @@
 return {
-  -- "prichrd/netrw.nvim", -- fancy netrw
   "stevearc/oil.nvim",
   dependencies = {
     "nvim-tree/nvim-web-devicons", -- icons
