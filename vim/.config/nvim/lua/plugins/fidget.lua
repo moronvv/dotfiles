@@ -4,7 +4,6 @@ return {
   opts = {
     window = {
       blend = 0,
-      border = "solid",
     },
   },
 }
