@@ -7,6 +7,7 @@ return {
         "GitSignsChange",
         "GitSignsDelete",
       },
+      exclude_groups = {},
     })
 
     vim.opt.pumblend = 10

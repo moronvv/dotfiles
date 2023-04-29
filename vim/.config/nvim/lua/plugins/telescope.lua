@@ -43,26 +43,46 @@ return {
 
     -- Add leader shortcuts
     local builtin = require("telescope.builtin")
+    local themes = require("telescope.themes")
     local opts = { noremap = true, silent = true }
 
+    -- helper for applying theme to all pickers
+    local call_telescope = function(input, opts)
+      local theme = themes.get_dropdown(opts)
+      input(theme)
+    end
+
     vim.keymap.set("n", "<leader><space>", function()
-      builtin.find_files({ hidden = true })
+      call_telescope(builtin.find_files, { hidden = true })
     end, opts)
-    vim.keymap.set("n", "<leader>sw", builtin.lsp_dynamic_workspace_symbols, opts)
-    vim.keymap.set("n", "<leader>so", builtin.lsp_document_symbols, opts)
-    vim.keymap.set("n", "<leader>sp", builtin.live_grep, opts)
+    vim.keymap.set("n", "<leader>sw", function()
+      call_telescope(builtin.lsp_dynamic_workspace_symbols)
+    end, opts)
+    vim.keymap.set("n", "<leader>so", function()
+      call_telescope(builtin.lsp_document_symbols)
+    end, opts)
+    vim.keymap.set("n", "<leader>sp", function()
+      call_telescope(builtin.live_grep)
+    end, opts)
     vim.keymap.set("n", "<leader>fb", function()
-      builtin.buffers({ sort_mru = true })
+      call_telescope(builtin.buffers, { sort_mru = true })
     end, opts)
 
-    vim.keymap.set("n", "gd", builtin.lsp_definitions, opts)
-    vim.keymap.set("n", "gtd", builtin.lsp_type_definitions, opts)
-    vim.keymap.set("n", "gi", builtin.lsp_implementations, opts)
+    -- lsp
+    vim.keymap.set("n", "gd", function()
+      call_telescope(builtin.lsp_definitions)
+    end, opts)
+    vim.keymap.set("n", "gtd", function()
+      call_telescope(builtin.lsp_type_definitions)
+    end, opts)
+    vim.keymap.set("n", "gi", function()
+      call_telescope(builtin.lsp_implementations)
+    end, opts)
     vim.keymap.set("n", "gr", function()
-      builtin.lsp_references({ sort_mru = true })
+      call_telescope(builtin.lsp_references, { sort_mru = true })
     end, opts)
     vim.keymap.set("n", "<space>sd", function()
-      builtin.diagnostics({ bufnr = 0 })
+      call_telescope(builtin.diagnostics, { bufnr = 0 })
     end, opts)
   end,
 }
