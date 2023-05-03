@@ -5,16 +5,18 @@ return {
     "anuvyklack/animation.nvim",
   },
   config = function()
-    vim.opt.wrap = false
-    vim.opt.winwidth = 10
-    vim.opt.winminwidth = 10
+    vim.opt.wrap = false -- turn off text wrap
+    vim.opt.sidescrolloff = 999 -- keep screen centered horizontally
+
+    vim.opt.winwidth = 6
+    vim.opt.winminwidth = 6
     vim.opt.equalalways = false
 
     require("windows").setup({
-      autowidth = { --		       |windows.autowidth|
+      autowidth = {
         enable = true,
-        winwidth = 999, --		        |windows.winwidth|
-        filetype = { --	      |windows.autowidth.filetype|
+        winwidth = 999,
+        filetype = {
           help = 999,
         },
       },

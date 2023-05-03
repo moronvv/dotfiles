@@ -4,7 +4,7 @@ COLORSCHEMES_CONF_MAP = {
   ["catppuccin"] = {
     plugin = "catppuccin/nvim",
     alias = "catppuccin",
-    colorscheme = "catppuccin-macchiato",
+    colorscheme = "catppuccin-mocha",
     statusline_colorscheme = "catppuccin",
   },
   ["gruvbox-material"] = {

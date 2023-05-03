@@ -30,6 +30,9 @@ vim.opt.splitbelow = true
 -- lazy redraw when macro working
 vim.opt.lazyredraw = true
 
+-- show only one statusline on bottom
+vim.opt.laststatus = 3
+
 -- hide mode below statusline
 vim.opt.showmode = false
 
