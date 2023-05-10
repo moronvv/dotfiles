@@ -11,6 +11,7 @@ return {
     "ray-x/lsp_signature.nvim",
   },
   config = function()
+    local _ = require("helpers")
     local nvim_lsp = require("lspconfig")
 
     -- Mappings.
@@ -104,11 +105,10 @@ return {
         formatStdin = true,
       },
     }
-    local ensure_installed_formatters = {}
-    for formatter, _ in pairs(formatters) do
-      formatter = formatter:gsub("_", "-")
-      table.insert(ensure_installed_formatters, formatter)
-    end
+    local ensure_installed_formatters = _.map(function(x)
+      return _.replace(x, "_", "-")
+    end, _.keys(formatters))
+
     local language_formatters = {
       python = { formatters.black, formatters.isort, formatters.autoflake },
       go = { formatters.goimports_reviser },
@@ -123,13 +123,14 @@ return {
       toml = { formatters.prettier },
       htmldjango = { formatters.djlint },
     }
+    local efm_languages = _.keys(language_formatters)
 
     -- language servers configuration
     local servers = {
       efm = {
-        filetypes = language_formatters,
+        filetypes = efm_languages,
         init_options = { documentFormatting = true },
-        settings = { rootMarkers = { ".git/" }, languages = language_formatters },
+        settings = { rootMarkers = { ".git/" }, languages = efm_languages },
       },
       pyright = {},
       gopls = {},
