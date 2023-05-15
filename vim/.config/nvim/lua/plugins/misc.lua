@@ -1,5 +1,4 @@
 return {
-  "tpope/vim-surround", -- surrounder for parentheses, brackets, quotes etc
   "tpope/vim-unimpaired", -- move operations with [ and ]
   "tpope/vim-repeat", -- helper for . repeat operations
   "tpope/vim-abolish", -- smart sabstitution
