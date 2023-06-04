@@ -5,13 +5,11 @@ return {
     -- UI and autoinstall for LSPs
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
 
     -- show function signature on insert
     "ray-x/lsp_signature.nvim",
   },
   config = function()
-    local _ = require("lodash")
     local nvim_lsp = require("lspconfig")
 
     -- Mappings.
@@ -80,57 +78,8 @@ return {
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-    -- formatters configuration
-    local formatters = {
-      black = { formatCommand = "black --quiet -", formatStdin = true },
-      isort = { formatCommand = "isort --profile black -", formatStdin = true },
-      autoflake = {
-        formatCommand = "autoflake --remove-all-unused-imports --ignore-init-module-imports -",
-        formatStdin = true,
-      },
-      goimports_reviser = {
-        formatCommand = "goimports-reviser -rm-unused -set-alias -format --output stdout",
-      },
-      sql_formatter = {
-        formatCommand = "sql-formatter --language postgresql",
-        formatStdin = true,
-      },
-      prettier = {
-        formatCommand = "prettier --stdin-filepath ${INPUT}",
-        formatStdin = true,
-      },
-      djlint = { formatCommand = "djlint --reformat -", formatStdin = true },
-      stylua = {
-        formatCommand = "stylua --column-width=88 --indent-type=Spaces --indent-width=2 -",
-        formatStdin = true,
-      },
-    }
-    local ensure_installed_formatters = _.map(function(x)
-      return x:gsub("_", "-")
-    end, _.keys(formatters))
-
-    local language_formatters = {
-      python = { formatters.black, formatters.isort, formatters.autoflake },
-      go = { formatters.goimports_reviser },
-      lua = { formatters.stylua },
-      javascript = { formatters.prettier },
-      sql = { formatters.sql_formatter },
-      yaml = { formatters.prettier },
-      json = { formatters.prettier },
-      html = { formatters.prettier },
-      markdown = { formatters.prettier },
-      css = { formatters.prettier },
-      toml = { formatters.prettier },
-      htmldjango = { formatters.djlint },
-    }
-
     -- language servers configuration
     local servers = {
-      efm = {
-        filetypes = _.keys(language_formatters),
-        init_options = { documentFormatting = true },
-        settings = { rootMarkers = { ".git/" }, languages = language_formatters },
-      },
       pyright = {},
       gopls = {},
       tsserver = {},
@@ -165,11 +114,6 @@ return {
     }
 
     require("mason").setup()
-    require("mason-tool-installer").setup({
-      ensure_installed = ensure_installed_formatters,
-      auto_update = true,
-      run_on_start = true,
-    })
     require("mason-lspconfig").setup({
       ensure_installed = servers,
       automatic_installation = true,
