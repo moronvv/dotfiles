@@ -11,6 +11,4 @@ return {
   "nelstrom/vim-visual-star-search", -- star serch on visual selection
   { "felipec/vim-sanegx", keys = "gx" }, -- fix links opening by gx
   "romainl/vim-cool", -- disables highlighting after search
-
-  { "flowyroll/lodash.lua", build = "mkdir -p lua && cp src/*.lua lua" }, -- common lua functions
 }
