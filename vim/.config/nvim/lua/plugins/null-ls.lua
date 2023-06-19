@@ -19,7 +19,9 @@ return {
         autoflake = {
           extra_args = { "--ignore-init-module-imports" },
         },
-        goimports_reviser = {},
+        goimports_reviser = {
+          extra_args = { "-rm-unused", "-set-alias" },
+        },
         sql_formatter = {
           extra_args = { "--language", "postgresql" },
         },
