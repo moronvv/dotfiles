@@ -15,9 +15,9 @@ return {
       },
       formatting = {
         black = {},
-        isort = {},
+        isort = { "--profile", "black" },
         autoflake = {
-          extra_args = { "--ignore-init-module-imports" },
+          extra_args = { "--remove-all-unused-imports", "--ignore-init-module-imports" },
         },
         goimports_reviser = {
           extra_args = { "-rm-unused", "-set-alias" },
