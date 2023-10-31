@@ -144,8 +144,24 @@ bindkey '^U' backward-kill-line
 bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
-# Aliases
+# nvim
+export EDITOR='nvim'
 alias vim="nvim"
+alias vim-lazy="NVIM_APPNAME=lazy-vim nvim"
+
+function nvims() {
+  items=("default" "lazy-vim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+# Aliases
 alias python="python3"
 alias pip="pip3"
 alias ssh='TERM=xterm ssh'
@@ -167,7 +183,7 @@ eval "$(direnv hook zsh)"
 
 # python
 # ipdb
-export PYTHONBREAKPOINT=ipdb.set_trace
+# export PYTHONBREAKPOINT=ipdb.set_trace
 # pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
