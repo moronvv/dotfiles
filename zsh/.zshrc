@@ -92,6 +92,7 @@ plugins=(
   pip
   docker
   docker-compose
+  autoupdate
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
@@ -108,6 +109,10 @@ export SAVEHIST=10000
 setopt HIST_IGNORE_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
+
+# autoupdate
+ZSH_CUSTOM_AUTOUPDATE_QUIET=true
+ZSH_CUSTOM_AUTOUPDATE_NUM_WORKERS=8
 
 # User configuration
 
@@ -147,6 +152,7 @@ bindkey '^N' history-substring-search-down
 # nvim
 export EDITOR='nvim'
 alias vim="nvim"
+alias vimdiff='nvim -d'
 alias vim-lazy="NVIM_APPNAME=lazy-vim nvim"
 
 function nvims() {
