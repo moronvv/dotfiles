@@ -1,3 +1,8 @@
+# general
+alias python="python3"
+export EDITOR='nvim'
+export VISUAL="nvim"
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -76,6 +81,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 export FZF_DEFAULT_COMMAND='ag --hidden --path-to-ignore ~/.ignore -g ""'
 
 export AUTOSWITCH_SILENT=1
+export ZSH_PYENV_QUIET=1
 
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
@@ -85,7 +91,6 @@ export AUTOSWITCH_SILENT=1
 plugins=(
   git
   fzf
-  tmux
   brew
   pyenv
   python
@@ -96,10 +101,12 @@ plugins=(
   zsh-autosuggestions
   zsh-syntax-highlighting
   zsh-history-substring-search
-  zsh-completions
   z
   autoswitch_virtualenv
 )
+
+# workaround for zsh-completions
+fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
@@ -150,72 +157,29 @@ bindkey '^P' history-substring-search-up
 bindkey '^N' history-substring-search-down
 
 # nvim
-export EDITOR='nvim'
 alias vim="nvim"
 alias vimdiff='nvim -d'
-alias vim-lazy="NVIM_APPNAME=lazy-vim nvim"
-
-function nvims() {
-  items=("default" "lazy-vim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
 
 # Aliases
-alias python="python3"
-alias pip="pip3"
 alias ssh='TERM=xterm ssh'
-alias tmux-git-session="~/Documents/scripts/tmux-git-session.sh $1"
-alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
-
-# Environs
-export VISUAL="nvim"
 
 # zsh-history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
 
-# brew
-export PATH="/usr/local/sbin:$PATH"
-
-# direnv
-export DIRENV_LOG_FORMAT=
-eval "$(direnv hook zsh)"
-
-# python
-# ipdb
-# export PYTHONBREAKPOINT=ipdb.set_trace
 # pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-# Pyenv config
 export PYENV_ROOT="$HOME/.pyenv"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
 # go
 export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
+export GOROOT=/opt/homebrew/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 # haskell
-export PATH="$HOME/.local/bin:$PATH"
-source ~/.ghcup/env
+#export PATH="$HOME/.local/bin:$PATH"
+#source ~/.ghcup/env
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-[ -f "/Users/vlad/.ghcup/env" ] && source "/Users/vlad/.ghcup/env" # ghcup-env
-
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)

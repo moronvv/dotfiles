@@ -8,3 +8,6 @@ if Util.has("bufferline.nvim") then
   vim.keymap.set("n", "<A-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Move buffer left" })
   vim.keymap.set("n", "<A-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Move buffer right" })
 end
+
+-- fix exiting insert mode when in russian layout
+vim.keymap.set("i", "<C-х>", "<esc>")
