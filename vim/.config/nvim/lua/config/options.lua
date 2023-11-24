@@ -2,6 +2,12 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
+-- root dir detection
+vim.g.root_spec = { { ".git", "lua" }, "cwd" }
+
+-- python binary path for python provider
+vim.g.python3_host_prog = "~/.pyenv/shims/python3"
+
 local opt = vim.opt
 
 opt.spelllang = { "en", "ru" }
