@@ -32,4 +32,21 @@ return {
       },
     },
   },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {
+                "--select",
+                "E4,E7,E9,F",
+              },
+            },
+          },
+        },
+      },
+    },
+  },
 }
