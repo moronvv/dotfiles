@@ -12,6 +12,9 @@ local opt = vim.opt
 
 opt.spelllang = { "en", "ru" }
 
+-- turn off swapfiles
+opt.swapfile = false
+
 -- hide ~ at the end of file
 ---@diagnostic disable-next-line: assign-type-mismatch
 opt.fillchars = "eob: "
