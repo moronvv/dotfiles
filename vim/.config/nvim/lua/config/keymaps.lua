@@ -11,3 +11,6 @@ end
 
 -- fix exiting insert mode when in russian layout
 vim.keymap.set("i", "<C-х>", "<esc>")
+
+-- create command to copy current buffer's path
+vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})

@@ -1,26 +1,18 @@
 return {
   {
-    "jay-babu/mason-nvim-dap.nvim",
-    opts = function(_, opts)
-      vim.list_extend(opts.ensure_installed, {
-        "debugpy",
-      })
-    end,
-  },
-  {
     "stevearc/conform.nvim",
     dependencies = {
       {
         "williamboman/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
-          vim.list_extend(opts.ensure_installed, { "ruff", "isort", "autoflake" })
+          vim.list_extend(opts.ensure_installed, { "black", "isort", "autoflake" })
         end,
       },
     },
     opts = {
       formatters_by_ft = {
-        python = { "ruff_format", "isort", "autoflake" },
+        python = { "black", "isort", "autoflake" },
       },
       formatters = {
         isort = {
@@ -36,7 +28,16 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        ruff_lsp = {
+        basedpyright = {
+          settings = {
+            basedpyright = {
+              analysis = {
+                typeCheckingMode = "standard",
+              },
+            },
+          },
+        },
+        ruff = {
           init_options = {
             settings = {
               args = {

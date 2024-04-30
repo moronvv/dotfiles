@@ -8,6 +8,9 @@ vim.g.root_spec = { { ".git", "lua" }, "cwd" }
 -- python binary path for python provider
 vim.g.python3_host_prog = "~/.pyenv/shims/python3"
 
+-- use basedpyright instead of original pyright
+vim.g.lazyvim_python_lsp = "basedpyright"
+
 local opt = vim.opt
 
 opt.spelllang = { "en", "ru" }
