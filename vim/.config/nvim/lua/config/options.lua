@@ -10,6 +10,7 @@ vim.g.python3_host_prog = "~/.pyenv/shims/python3"
 
 -- use basedpyright instead of original pyright
 vim.g.lazyvim_python_lsp = "basedpyright"
+vim.g.lazyvim_python_ruff = "ruff_lsp"
 
 local opt = vim.opt
 
