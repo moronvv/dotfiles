@@ -100,8 +100,6 @@ plugins=(
   autoupdate
   zsh-autosuggestions
   zsh-syntax-highlighting
-  zsh-history-substring-search
-  z
   autoswitch_virtualenv
 )
 
@@ -110,12 +108,21 @@ fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 
 source $ZSH/oh-my-zsh.sh
 
-export HISTSIZE=10000
-export SAVEHIST=10000
-# setopt inc_append_history
-setopt HIST_IGNORE_DUPS
-setopt HIST_FIND_NO_DUPS
+# history
+export HISTSIZE=5000
+export SAVEHIST=5000
+export HISTDUP=erase
 setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_DUPS
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_FIND_NO_DUPS
+
+# keybindings
+bindkey -e
+# bindkey '^u' backward-kill-line
+bindkey '^p' history-search-backward
+bindkey '^n' history-search-forward
 
 # autoupdate
 ZSH_CUSTOM_AUTOUPDATE_QUIET=true
@@ -150,15 +157,6 @@ export LANG=en_US.UTF-8
 # gpg
 export GPG_TTY=$TTY
 
-# autocompletion
-autoload -U compinit; compinit
-
-# remove whole line
-bindkey '^U' backward-kill-line
-# partial history search
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-
 # nvim
 alias vim="nvim"
 alias vimdiff='nvim -d'
@@ -181,8 +179,14 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 # haskell
-#export PATH="$HOME/.local/bin:$PATH"
-#source ~/.ghcup/env
+[ -f "$HOME/.ghcup/env" ] && . "$HOME/.ghcup/env" # ghcup-env
+export PATH="$HOME/.local/bin:$PATH"
+
+# autocompletion
+autoload -U compinit; compinit
+
+# zoxide initialization
+eval "$(zoxide init --cmd cd zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
