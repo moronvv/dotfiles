@@ -37,12 +37,16 @@ return {
             },
           },
         },
-        ruff_lsp = {
+        ruff = {
           init_options = {
             settings = {
-              args = {
-                "--select",
-                "E4,E7,E9,F",
+              lint = {
+                select = {
+                  "E4",
+                  "E7",
+                  "E9",
+                  "F",
+                },
               },
             },
           },
