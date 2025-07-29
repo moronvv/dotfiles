@@ -6,20 +6,24 @@ return {
         "williamboman/mason.nvim",
         opts = function(_, opts)
           opts.ensure_installed = opts.ensure_installed or {}
-          vim.list_extend(opts.ensure_installed, { "black", "isort", "autoflake" })
+          vim.list_extend(opts.ensure_installed, { "ruff" })
         end,
       },
     },
     opts = {
-      formatters_by_ft = {
-        python = { "black", "isort", "autoflake" },
-      },
       formatters = {
-        isort = {
-          prepend_args = { "--profile", "black" },
+        ruff_format = {
+          append_args = { "--line-length", "120" },
         },
-        autoflake = {
-          prepend_args = { "--remove-all-unused-imports", "--ignore-init-module-imports" },
+        ruff_fix = {
+          append_args = { "--ignore", "D,PT001,PT023" },
+        },
+      },
+      formatters_by_ft = {
+        python = {
+          "ruff_fix",
+          "ruff_format",
+          "ruff_organize_imports",
         },
       },
     },
