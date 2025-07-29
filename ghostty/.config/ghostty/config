@@ -1,0 +1,19 @@
+# Merges titlebar with contents
+macos-titlebar-style = transparent
+background-opacity = 0.88
+background-blur = true
+
+window-padding-x = 8
+
+quit-after-last-window-closed = true
+confirm-close-surface = false
+
+theme = rose-pine
+
+font-family = "JetBrainsMonoNL Nerd Font Mono"
+font-size = 15
+
+keybind = cmd+k=goto_split:top
+keybind = cmd+j=goto_split:bottom
+keybind = cmd+h=goto_split:left
+keybind = cmd+l=goto_split:right
