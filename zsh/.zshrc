@@ -163,6 +163,7 @@ alias vimdiff='nvim -d'
 
 # Aliases
 alias ssh='TERM=xterm ssh'
+alias rm='trash'
 
 # zsh-history-substring-search
 export HISTORY_SUBSTRING_SEARCH_PREFIXED=1
