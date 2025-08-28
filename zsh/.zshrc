@@ -36,6 +36,8 @@ plugins=(
   git
   fzf
   brew
+  docker
+  kubectl
   autoupdate
   evalcache
   autoswitch_virtualenv
@@ -71,6 +73,7 @@ bindkey -M emacs '^N' history-substring-search-down
 # nvim
 alias vim="nvim"
 alias vimdiff='nvim -d'
+alias cat='bat --paging=never'
 
 ## EXPORTS
 
@@ -110,6 +113,7 @@ export PATH=$PATH:$GOROOT/bin
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 _evalcache pyenv init - zsh
+_evalcache pyenv virtualenv-init - zsh
 
 # init zoxide, replace `cd`
 _evalcache zoxide init --cmd cd zsh
