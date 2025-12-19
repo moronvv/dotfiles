@@ -1,9 +1,14 @@
 return {
   "ibhagwan/fzf-lua",
-  opts = function(_, opts)
-    local config = require("fzf-lua.config")
-
-    config.defaults.keymap.builtin["<c-d>"] = "preview-page-down"
-    config.defaults.keymap.builtin["<c-u>"] = "preview-page-up"
-  end,
+  opts = {
+    fzf_opts = {
+      ["--history"] = vim.fn.stdpath("data") .. "/fzf-history",
+    },
+    keymap = {
+      builtin = {
+        ["<c-d>"] = "preview-page-down",
+        ["<c-u>"] = "preview-page-up",
+      },
+    },
+  },
 }
