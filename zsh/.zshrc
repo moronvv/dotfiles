@@ -117,3 +117,6 @@ _evalcache pyenv virtualenv-init - zsh
 
 # init zoxide, replace `cd`
 _evalcache zoxide init --cmd cd zsh
+
+# tls fix for opencode
+export NODE_EXTRA_CA_CERTS=$HOME/Documents/certs/RootCA.crt
