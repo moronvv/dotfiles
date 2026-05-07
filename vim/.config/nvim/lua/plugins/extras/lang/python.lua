@@ -33,6 +33,7 @@ return {
     opts = {
       servers = {
         basedpyright = {
+          timeout = 10000,
           settings = {
             basedpyright = {
               analysis = {
