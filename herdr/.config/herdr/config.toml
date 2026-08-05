@@ -1,3 +1,5 @@
+onboarding = false
+
 [theme]
 name = "rose-pine"
 auto_switch = false
@@ -15,6 +17,7 @@ pane_history = false
 
 [keys]
 prefix = "ctrl+a"
+detach = "prefix+d"
 goto = "prefix+s"
 split_vertical = "prefix+|"
 navigate_workspace_up = "k"
