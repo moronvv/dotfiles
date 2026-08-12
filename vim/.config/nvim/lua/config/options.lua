@@ -5,9 +5,6 @@
 -- root dir detection
 vim.g.root_spec = { { ".git", "lua" }, "cwd" }
 
--- use basedpyright instead of original pyright
-vim.g.lazyvim_python_lsp = "basedpyright"
-
 -- spelling languages
 vim.opt.spelllang = { "en", "ru" }
 

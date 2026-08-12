@@ -32,27 +32,8 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        -- Type checking only
-        basedpyright = {
-          mason = true,
-          settings = {
-            basedpyright = {
-              disableLanguageServices = true,
-              analysis = {
-                typeCheckingMode = "standard",
-              },
-            },
-          },
-        },
-        -- LSP features only
-        ty = {
-          mason = true,
-          settings = {
-            ty = {
-              diagnosticMode = "off",
-            },
-          },
-        },
+        pyright = { enabled = false },
+        ty = { mason = true },
         ruff = {
           mason = true,
           init_options = {
