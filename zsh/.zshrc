@@ -1,36 +1,16 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 export ZSH="$HOME/.oh-my-zsh"
 
 DISABLE_MAGIC_FUNCTIONS=true
 ZSH_DISABLE_COMPFIX=true
 
-ZSH_THEME="spaceship"
-
-SPACESHIP_PROMPT_ORDER=(
-  time           # Time stamps section
-  user           # Username section
-  dir            # Current directory section
-  host           # Hostname section
-  git            # Git section (git_branch + git_status)
-  # python         # Python section
-  # golang         # Go section
-  # haskell        # Haskell Stack section
-  lua            # Lua section
-  # docker         # Docker section
-  # docker_compose # Docker section
-  venv           # virtualenv section
-  conda          # conda virtualenv section
-  uv             # uv section
-  # kubectl        # Kubectl context section
-  # ansible        # Ansible section
-  exec_time      # Execution time
-  async          # Async jobs indicator
-  line_sep       # Line break
-  battery        # Battery level and status
-  jobs           # Background jobs indicator
-  exit_code      # Exit code section
-  sudo           # Sudo indicator
-  char           # Prompt character
-)
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
   git
@@ -120,3 +100,6 @@ _evalcache zoxide init --cmd cd zsh
 
 # tls fix for opencode
 export NODE_EXTRA_CA_CERTS=$HOME/Documents/certs/RootCA.crt
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
