@@ -7,3 +7,7 @@ vim.keymap.set("i", "<C-х>", "<esc>")
 
 -- create command to copy current buffer's path
 vim.api.nvim_create_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+
+-- for jumping between conflicts
+vim.keymap.set("n", "]x", "/^<<<<<<<<CR>", { desc = "Next conflict" })
+vim.keymap.set("n", "[x", "?^<<<<<<<<CR>", { desc = "Prev conflict" })
