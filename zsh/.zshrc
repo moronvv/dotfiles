@@ -10,6 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 DISABLE_MAGIC_FUNCTIONS=true
 ZSH_DISABLE_COMPFIX=true
 
+export AUTOSWITCH_SILENT=1
+
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
